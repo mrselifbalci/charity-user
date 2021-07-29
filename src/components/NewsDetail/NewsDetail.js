@@ -57,7 +57,7 @@ export default function NewsDetail() {
                  <img className="content-2-img" src={post.content_img_2} alt="body_img"/>
             </div>
             <div>
-                <p className="content-4-text">{post.content_4}</p>
+                <p className="content-5-text">{post.content_4}</p>
             </div>
            
             
