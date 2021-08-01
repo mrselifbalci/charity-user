@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "ckeditor4": "^4.16.0",
+    "dotenv": "^8.2.0",
     "json-server": "^0.16.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -20,7 +21,7 @@
     "react-paypal-button-v2": "^2.6.3",
     "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0"
   }
 }

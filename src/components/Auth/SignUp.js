@@ -20,7 +20,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 
 	useEffect(() => {
 		axios
-			.get('https://mern-brothers.herokuapp.com/users')
+			.get('http://localhost:5001/users')
 			.then((res) => {
 				setUsers(res.data);
 			})
@@ -28,22 +28,14 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 	}, []);
 
 	const responseGoogle = (response) => {
+		console.log(response);
 		if (!response.googleId)
 			return (document.querySelector('.valid').textContent =
-				'Something went wrong try again or sign up manually');
+				'Something went wrong. Google sign up is not working. Try again or sign up manually');
 		const { familyName, givenName, email, googleId } = response.profileObj;
-		if (users) {
-			for (let i = 0; i < users.length; i++) {
-				if (users[i].email === email) {
-					setExistEmail(true);
-					document.querySelector('.valid').textContent = 'You already signed up. Please Log in.';
-					return;
-				}
-			}
-		}
 
 		axios
-			.post('https://mern-brothers.herokuapp.com/users', {
+			.post('http://localhost:5001/users/signup', {
 				firstname: givenName,
 				lastname: familyName,
 				username: email,
@@ -51,6 +43,17 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 				password: googleId
 			})
 			.then((res) => {
+				axios
+					.post('http://localhost:5001/users/signin', {
+						email: email,
+						password: googleId
+					})
+					.then((res) => {
+						sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 				window.scroll(0, 0);
 				document.querySelector('.valid').textContent = 'Signed up successfully. Redirecting to homepage...';
 				setTimeout(() => {
@@ -90,7 +93,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 
 		if (!existEmail) {
 			axios
-				.post('https://mern-brothers.herokuapp.com/users', {
+				.post('http://localhost:5001/users/signup', {
 					firstname: name,
 					lastname: surname,
 					username: username,
@@ -100,13 +103,13 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 				.then((res) => {
 					window.scroll(0, 0);
 					axios
-						.post('https://mern-brothers.herokuapp.com/signin', {
-							email:emailInput,
-							password:password
+						.post('http://localhost:5001/users/signin', {
+							email: emailInput,
+							password: password
 						})
 						.then((res) => {
-							setIsLoggedIn(true)
-							sessionStorage.setItem('userInfo', JSON.stringify(res.data))
+							setIsLoggedIn(true);
+							sessionStorage.setItem('userInfo', JSON.stringify(res.data));
 
 							console.log(res.data);
 						})
@@ -167,7 +170,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 						onChange={(e) => setSurname(e.target.value)}
 						required
 					/>
-					<label style={{ color: '#347ca5' }} htmlFor="username">
+					{/* <label style={{ color: '#347ca5' }} htmlFor="username">
 						Username
 					</label>
 					<input
@@ -179,7 +182,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 						placeholder="Enter your username"
 						onChange={(e) => setUsername(e.target.value)}
 						required
-					/>
+					/> */}
 					<label style={{ color: '#347ca5' }} htmlFor="email">
 						Email
 					</label>
@@ -232,7 +235,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 							</button>
 						)}
 						className="sign-up-google"
-						clientId="906847324262-e38d6kiavhpnl6nu22g4u03ms5h4ul42.apps.googleusercontent.com"
+						clientId="906847324262-l8eosmhanc5hq8015f5sq2dle6r6hh62.apps.googleusercontent.com"
 						buttonText="Join with Google"
 						onSuccess={responseGoogle}
 						onFailure={responseGoogle}
