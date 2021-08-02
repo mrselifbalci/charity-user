@@ -13,6 +13,7 @@ const Slider = () => {
 			<p id="quote-text">
 				<span>
 					"Those who are happiest are those who does the most for others."
+					"Those who are happiest are those who does the most for others."
 				</span>
 				<br />
 				<span id="quote-person">Booker T. Washington</span>
