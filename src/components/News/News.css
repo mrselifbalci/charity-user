@@ -45,6 +45,7 @@
 	background: #e5e5e5;
 	padding: 20px 10px;
 }
+
 .latest-news-single-news-container {
 	display: flex;
 	margin: 5%;
@@ -71,7 +72,7 @@
 	font-family: Roboto;
 	font-style: normal;
 	font-size: 18px;
-	line-height: 24px;
+	line-height: 1.6;
 	margin-bottom: 20px;
 }
 .latest-news-single-news-title {
@@ -80,10 +81,11 @@
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 28px;
 	text-align: left;
 	width: 85%;
 	margin-bottom: 20px;
+	color: #347ca5;
 }
 
 .latest-news-single-news-read-more-btn {
@@ -92,7 +94,7 @@
 	justify-content: center;
 	align-items: center;
 	width: 176px;
-	height: 52px;
+	height: 48px;
 	background-color: #f49131;
 	border-radius: 10px;
 	font-family: Roboto;
@@ -105,39 +107,50 @@
 	cursor: pointer;
 }
 
-#news-btn-viewmore {
-	width: 200px;
-	height: 60px;
-	left: 461px;
-	background-color: #f49131;
-	border-radius: 5px;
-	background-color: #f49131;
-	border-radius: 5px;
-	font-family: Roboto;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 24px;
-	line-height: 28px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	color: #ffffff;
-	border: none;
-}
-.tr-btn-viewmore {
+.latest-news-page-navigation {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 90%;
+	justify-content: space-around;
+	font-family: Roboto;
+	color: #347ca5;
 }
 
-.allPosts {
-	color: black;
-	margin-left: auto;
-	display: flex;
-	justify-content: center;
-	margin-top: 10px;
-	background-color: aquamarine;
+.latest-news-page-navigation-btn {
+	color: #347ca5;
+	border: none;
+	cursor: pointer;
+	padding: 1px;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 18px;
+	background-color: #e5e5e5;
 }
+
+.latest-news-go-to-page-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+	text-align: center;
+	font-family: Roboto;
+	color: #347ca5;
+	margin: 15px auto;
+}
+
+.latest-news-go-to-page-container > input {
+	width: 55px;
+	margin-top: 5px;
+	height: 20px;
+	border: none;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.latest-news-go-to-page {
+	font-family: Roboto;
+	color: #347ca5;
+}
+
 /*******************************************/
 @media (max-width: 1366px) {
 }
