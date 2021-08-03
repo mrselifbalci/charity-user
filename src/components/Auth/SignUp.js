@@ -35,7 +35,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 		const { familyName, givenName, email, googleId } = response.profileObj;
 
 		axios
-			.post('http://localhost:5001/users/signup', {
+			.post('https://charity-backend-july.herokuapp.com/users/signup', {
 				firstname: givenName,
 				lastname: familyName,
 				username: email,
@@ -44,7 +44,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 			})
 			.then((res) => {
 				axios
-					.post('http://localhost:5001/users/signin', {
+					.post('https://charity-backend-july.herokuapp.com/users/signin', {
 						email: email,
 						password: googleId
 					})
@@ -71,7 +71,6 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 			emailInput.trim() === '' ||
 			password.trim() === '' ||
 			confirm.trim() === '' ||
-			username.trim() === '' ||
 			name.trim() === '' ||
 			surname.trim() === ''
 		) {
@@ -93,7 +92,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 
 		if (!existEmail) {
 			axios
-				.post('http://localhost:5001/users/signup', {
+				.post('https://charity-backend-july.herokuapp.com/users/signup', {
 					firstname: name,
 					lastname: surname,
 					username: username,
@@ -103,7 +102,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 				.then((res) => {
 					window.scroll(0, 0);
 					axios
-						.post('http://localhost:5001/users/signin', {
+						.post('https://charity-backend-july.herokuapp.com/users/signin', {
 							email: emailInput,
 							password: password
 						})
