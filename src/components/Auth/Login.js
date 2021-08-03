@@ -4,7 +4,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import './Login.css';
 import GoogleLogin from 'react-google-login';
 import googleLogo from './grommet-icons_google.jpg';
-require('dotenv');
+require('dotenv'); 
 
 const Login = ({ setIsLoggedIn }) => {
 	const [ email, setEmail ] = useState('');
@@ -19,7 +19,7 @@ const Login = ({ setIsLoggedIn }) => {
 				'Something went wrong try again or sign in manually');
 		const { email, googleId } = response.profileObj;
 		axios
-			.post('http://localhost:5001/users/signin', {
+			.post('https://charity-backend-july.herokuapp.com/users/signin', {
 				email: email,
 				password: googleId
 			})
@@ -35,7 +35,7 @@ const Login = ({ setIsLoggedIn }) => {
 			setIsLoggedIn(true);
 			history.push('/');
 		}, 1500);
-	};
+	}; 
 
 	const login = (e) => {
 		if (email.trim() === '' || password.trim() === '') {
