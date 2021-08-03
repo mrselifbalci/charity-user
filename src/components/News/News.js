@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './News.css';
+import { Link } from 'react-router-dom';
 
 const News = () => {
 	const [news, setNews] = useState([]);
 	const [page, setPage] = useState(1);
 	const [slider, setSlider] = useState([]);
 	const [url, setUrl] = useState();
+	const [navPages, setNavPages] = useState();
 
 	useEffect(() => {
 		axios
 			.get('https://charity-backend-july.herokuapp.com/slider/type/latest-news')
 			.then((res) => {
 				setSlider(res.data.data[0]);
-				setUrl(slider.mediaId.url);
+				setUrl(res.data.data[0].mediaId.url);
 
 				console.log(slider);
 			})
@@ -22,10 +24,17 @@ const News = () => {
 			.get(`https://charity-backend-july.herokuapp.com/news?page=${page}&limit=2`)
 			.then((res) => {
 				setNews(res.data.data);
-				console.log(news);
+				setNavPages(Math.ceil(res.data.total / 2));
 			})
 			.catch((err) => console.log(err));
-	}, [url]);
+	}, [url, page]);
+
+	const pages = [];
+
+	for (let i = 1; i <= navPages; i++) {
+		pages.push(i);
+	}
+
 	return (
 		<div>
 			<div
@@ -40,18 +49,63 @@ const News = () => {
 					<div className='latest-news-single-news-container'>
 						<img src={newsItem.mediaId.url} alt='latest-news-pic' />
 						<div>
-							<h2 className='latest-news-single-news-title'>
+							<h1 className='latest-news-single-news-title'>
 								{newsItem.title}
-							</h2>
+							</h1>
 							<p className='latest-news-single-news-content'>
-								{newsItem.content.split(' ').slice(0, 90).join(' ')}
+								{newsItem.summary.slice(0, 500)}...
 							</p>
-							<button className='latest-news-single-news-read-more-btn'>
-								Read More
-							</button>
+							<Link to={`/newsdetail/${newsItem._id}`}>
+								<button className='latest-news-single-news-read-more-btn'>
+									Read More
+								</button>
+							</Link>
 						</div>
 					</div>
 				))}
+				<div className='latest-news-page-navigation'>
+					<button
+						className='latest-news-page-navigation-btn'
+						onClick={(e) => {
+							e.preventDefault();
+							if (page > 1) {
+								setPage(page - 1);
+							} else {
+								setPage(1);
+							}
+						}}>
+						&laquo; Previous
+					</button>
+					<h3>
+						{page} / {navPages}
+					</h3>
+					<button
+						className='latest-news-page-navigation-btn'
+						onClick={(e) => {
+							e.preventDefault();
+							if (page + 1 <= navPages) {
+								setPage(page + 1);
+							} else {
+								setPage(navPages);
+							}
+						}}>
+						Next &raquo;
+					</button>
+				</div>
+				<div className='latest-news-go-to-page-container'>
+					<label htmlFor='latest-news-go-to-page'>Go to Page</label>
+					<input
+						type='number'
+						id='latest-news-go-to-page'
+						onChange={(e) => {
+							if (e.target.value >= 1 && e.target.value <= navPages) {
+								setPage(e.target.value);
+							} else {
+								setPage(page);
+							}
+						}}
+					/>
+				</div>
 			</div>
 		</div>
 	);
