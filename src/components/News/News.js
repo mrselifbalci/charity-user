@@ -1,79 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './News.css';
 import axios from 'axios';
+import './News.css';
 
-const News = () => { 
-	// const {id} =useParams();
-	const [posts, setPosts] = useState([]);
-	const [viewmore, setViewmore] = useState(0);
+const News = () => {
+	const [news, setNews] = useState([]);
+	const [page, setPage] = useState(1);
+	const [slider, setSlider] = useState([]);
+	const [url, setUrl] = useState();
+
 	useEffect(() => {
 		axios
-			.get('https://mern-brothers.herokuapp.com/posts')
-			.then((res) => setPosts(res.data.docs))
+			.get('https://charity-backend-july.herokuapp.com/slider/type/latest-news')
+			.then((res) => {
+				setSlider(res.data.data[0]);
+				setUrl(slider.mediaId.url);
+
+				console.log(slider);
+			})
 			.catch((err) => console.log(err));
-			console.log()
-	}, []); 
-
-	const viewMore = () => {
-		if (posts.length - 2 <= viewmore) {
-			document.querySelector('.allPosts').textContent =
-				'No more stories to view...';
-		} else {
-			setViewmore(viewmore + 2);
-		}
-	};
-
-	// console.log(posts);
+		axios
+			.get(`https://charity-backend-july.herokuapp.com/news?page=${page}&limit=2`)
+			.then((res) => {
+				setNews(res.data.data);
+				console.log(news);
+			})
+			.catch((err) => console.log(err));
+	}, [url]);
 	return (
 		<div>
-			<div className="newss-bg-img"></div>
-			<div className="newss-text">
-				<span>
-					Lorem Ipsum is simply dummy text of the printing and typesetting
-					industry. Lorem Ipsum has been the industry's standard dummy text
-					ever since the 1500s, when an unknown printer took a galley of
-					type and scrambled it to make a type specimen book.{' '}
-				</span>
+			<div
+				className='latest-news-header-image'
+				style={{ backgroundImage: `url(${url})` }}></div>
+			<div className='latest-news-header-img-quote'>
+				<span>{slider.quote}</span>
 			</div>
-			<div className="newss-header">
-				<p>Latest News</p>
+			<div className='latest-news-header-title'>{slider.title}</div>
+			<div className='latest-news-container'>
+				{news.map((newsItem) => (
+					<div className='latest-news-single-news-container'>
+						<img src={newsItem.mediaId.url} alt='latest-news-pic' />
+						<div>
+							<h2 className='latest-news-single-news-title'>
+								{newsItem.title}
+							</h2>
+							<p className='latest-news-single-news-content'>
+								{newsItem.content.split(' ').slice(0, 90).join(' ')}
+							</p>
+							<button className='latest-news-single-news-read-more-btn'>
+								Read More
+							</button>
+						</div>
+					</div>
+				))}
 			</div>
-			<table id="news-area">
-				<br />
-				{posts.length !== 0 &&
-					posts
-						.slice(posts.length - 2 - viewmore, posts.length)
-						.reverse()
-						.map((post) => (
-							<tr className="news-area">
-								<td className="news-area-img">				
-											<img src={post.post_img_url} alt="" />						
-								</td>
-
-								<td>
-									<br />
-									<tr className="news-area-header">
-										<h2>{post.title}</h2>
-									</tr>
-									<tr className="news-area-text">
-										<br />
-										<p> {post.summary}</p>
-									</tr>
-									<tr className="tr-readmore">
-										<Link to={`/newsdetail/${post.id}`} className="news-btn-readmore">
-											Read More
-										</Link>
-									</tr>
-								</td>
-							</tr>
-						))}<br/>
-				<tr className="allPosts"></tr>
-				<tr className="tr-btn-viewmore">
-				
-					<button id="news-btn-viewmore" onClick={viewMore}>View More</button>
-				</tr>
-			</table>
 		</div>
 	);
 };
