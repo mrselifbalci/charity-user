@@ -1,8 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
+import axios from 'axios';
 import './GetInvolved.css';
 import { Link, useHistory } from 'react-router-dom';
+import GetInvolvedCard from './GetInvolvedCard';
 
 const GetInvolved = ({isLoggedIn}) => {
+   const[slider,setSlider]=useState([])
+   const[url,setUrl]=useState('')
+   const[getInvolved,setGetInvolved]=useState([])
+  
+
     const history = useHistory()
     const alertFunc = () => {
         if(isLoggedIn) {
@@ -14,48 +21,32 @@ const GetInvolved = ({isLoggedIn}) => {
     }
     useEffect(() => {
 		window.scroll(0, 0);
+        axios.get('https://charity-backend-july.herokuapp.com/slider/type/involve')
+        .then((res) => {
+            setSlider(res.data.data[0])
+            setUrl(res.data.data[0].mediaId.url)
+        }).catch((err) => console.log(err));
+   
+
+        axios.get('https://charity-backend-july.herokuapp.com/getinvolved')
+        .then((res) => {
+            setGetInvolved(res.data.response)
+        }).catch((err) => console.log(err));
+        console.log()
 	}, []);
     return (
-        <div className="getInvolved">
-           
-            <div className="getInvolved_img"></div>
-          <div className="getInvolved_text">
-                <p style={{marginLeft:"30px"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-
-            </div> 
-            <div className="getInvolved_title">
-                <p style={{marginLeft:"30px"}}>Other ways to donate...</p>
-            </div>
+        <div className="getInvolved"> 
+          <div className="getInvolved_img" style={{backgroundImage: `url('${url}')`}}></div>     
+          <div className="getInvolved_text"> 
+                <p style={{marginLeft:"30px"}}>{slider.quote}</p>
+          </div> 
+          <div className="getInvolved_title">
+                <p style={{marginLeft:"30px"}}>{slider.title}</p>
+          </div>
             <div className="getInvolved_images"> 
-                <div className="getInvolved_image">
-                    <Link to='/getinvolved/donategoods' className="getInvolved_image_img image_bg_goods">
-                        <span className="donate_good"> Donate goods</span>
-                    </Link>
-                </div>
-              
-
-                <div className="getInvolved_image">
-                    <div className="getInvolved_image_img">
-                    <Link onClick={() => alertFunc()} className="getInvolved_image_img image_bg_card">
-                        <span className="donate_good">Donate with a gift card</span>
-                    </Link>
-                    </div>
-                </div>  
-
-                 <div className="getInvolved_image">
-                    <Link to='/getinvolved/donateyourtime' className="getInvolved_image_img image_bg_time">
-                        <span  className="donate_good"> Donate your time</span>
-                    </Link>
-                </div>
-
-                <div className="getInvolved_image">
-                    <div className="getInvolved_image_img">
-                    <Link to='/getinvolved/beanambassador' className="getInvolved_image_img image_bg_ambassador">
-                        <span className="donate_good"> Be an ambassador</span>
-                    </Link>  
-                    </div>
-                </div>
-
+                {getInvolved.map(item=>{
+                   return <GetInvolvedCard item={item} url={item.mediaId.url} key={item._id}/>
+                })}
             </div>
 
         </div>

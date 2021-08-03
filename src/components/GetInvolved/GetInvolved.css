@@ -5,7 +5,6 @@
   left: 0px;
   top: 106px;
   border-radius: 0px;
-  background-image: url("https://i.postimg.cc/4y4VVWY8/69d547-80caef70e4734a62bbce3e41b10653df-mv2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -70,7 +69,7 @@
   margin-top: 0px !important;
   border-radius: 3px;
 }
-.image_bg_goods {
+/* .image_bg_goods {
   background-image: url("https://i.postimg.cc/K8XTGcZc/photo-1518949142393-f1d68174c92a.jpg");
 }
 .image_bg_card {
@@ -81,7 +80,7 @@
 }
 .image_bg_ambassador {
   background-image: url("https://i.postimg.cc/VsKq10mf/craig-philbrick-kfx-PVP-7-P7-U-unsplash.jpg");
-}
+} */
 .getInvolved_image:hover .getInvolved_image_img,
 .getInvolved_image:focus .getInvolved_image_img {
   transform: scale(1.2);
@@ -117,17 +116,14 @@
 }
 /*****************************************************/
 @media only screen and (max-width: 1366px) {
- 
-
-  .getInvolved_title {   
-    height: 100px;   
+  .getInvolved_title {
+    height: 100px;
     line-height: 100px;
   }
   .getInvolved_image_img:hover .donate_good {
     font-size: 20px;
     transform: scale(1.15, 1.15);
   }
-
 }
 @media only screen and (max-width: 1024px) {
   .getInvolved_img {
@@ -178,68 +174,67 @@
   }
 }
 @media only screen and (max-width: 736px) {
-  .getInvolved_img {    
-    height: 380px; 
-  }    
-  .getInvolved_text { 
-    height: 100px; 
-    padding-left: 10px;  
-    font-size: 16px;    
-    font-weight: 300;
-    line-height: 24px;   
+  .getInvolved_img {
+    height: 380px;
   }
-  .getInvolved_title {   
-    height: 60px;   
+  .getInvolved_text {
+    height: 100px;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+  }
+  .getInvolved_title {
+    height: 60px;
     font-size: 30px;
     line-height: 60px;
   }
-  .getInvolved_images {  
-    height: 540px;  
-    flex-direction: row; 
+  .getInvolved_images {
+    height: 540px;
+    flex-direction: row;
   }
   .getInvolved_images .getInvolved_image {
     width: 320px;
     height: 220px;
   }
-  .getInvolved_image_img .donate_good {  
+  .getInvolved_image_img .donate_good {
     font-size: 24px;
     font-weight: 300;
     line-height: 38px;
-   
   }
   .getInvolved_image_img:hover .donate_good {
-    font-size: 16px;    
+    font-size: 16px;
   }
 }
 
 @media only screen and (max-width: 667px) {
-  .getInvolved_img {   
-    height: 305px;   
+  .getInvolved_img {
+    height: 305px;
   }
-  
+
   .getInvolved_text {
-    height: 100px;  
+    height: 100px;
     padding-left: 10px;
-    padding-right: 10px;   
-    font-size: 16px;   
+    padding-right: 10px;
+    font-size: 16px;
     font-weight: 300;
-    line-height: 25px;  
+    line-height: 25px;
   }
-  .getInvolved_title {  
+  .getInvolved_title {
     height: 50px;
     font-size: 30px;
     line-height: 50px;
   }
-  .getInvolved_images {   
-    height: 520px; 
-    flex-direction: row;  
+  .getInvolved_images {
+    height: 520px;
+    flex-direction: row;
   }
   .getInvolved_images .getInvolved_image {
     width: 290px;
-    height: 210px;  
-  }  
-  .getInvolved_image_img .donate_good {  
-    font-size: 24px;   
+    height: 210px;
+  }
+  .getInvolved_image_img .donate_good {
+    font-size: 24px;
     font-weight: 300;
     line-height: 38px;
   }
@@ -248,7 +243,6 @@
     transform: scale(1.15, 1.15);
   }
 }
-
 
 @media only screen and (max-width: 414px) {
   .getInvolved_img {
@@ -264,7 +258,7 @@
     line-height: 20px;
   }
   .getInvolved_title {
-    height: 45px; 
+    height: 45px;
     font-size: 24px;
     line-height: 45px;
   }
@@ -275,12 +269,12 @@
     width: 340px;
     height: 220px;
   }
-  .getInvolved_image_img .donate_good {    
-    font-size: 26px;   
-    line-height: 28px;    
+  .getInvolved_image_img .donate_good {
+    font-size: 26px;
+    line-height: 28px;
   }
-  .getInvolved_image_img:hover .donate_good{
-    font-size: 16px;    
+  .getInvolved_image_img:hover .donate_good {
+    font-size: 16px;
   }
 }
 
@@ -298,7 +292,7 @@
     line-height: 20px;
   }
   .getInvolved_title {
-    height: 45px; 
+    height: 45px;
     font-size: 24px;
     line-height: 45px;
   }
@@ -310,18 +304,17 @@
     height: 200px;
   }
 
-  .getInvolved_image_img .donate_good {    
+  .getInvolved_image_img .donate_good {
     font-size: 22px;
     font-weight: 400;
     line-height: 28px;
-    letter-spacing: 0em;    
+    letter-spacing: 0em;
   }
-  .getInvolved_image_img:hover .donate_good{
+  .getInvolved_image_img:hover .donate_good {
     font-size: 12px;
     transform: scale(1.5, 1.5);
   }
 }
-
 
 @media only screen and (max-width: 360px) {
   .getInvolved_img {
@@ -337,7 +330,7 @@
     line-height: 20px;
   }
   .getInvolved_title {
-    height: 45px; 
+    height: 45px;
     font-size: 24px;
     line-height: 45px;
   }
@@ -349,13 +342,13 @@
     height: 180px;
   }
 
-  .getInvolved_image_img .donate_good {    
+  .getInvolved_image_img .donate_good {
     font-size: 20px;
     font-weight: 400;
     line-height: 28px;
-    letter-spacing: 0em;    
+    letter-spacing: 0em;
   }
-  .getInvolved_image_img:hover .donate_good{
+  .getInvolved_image_img:hover .donate_good {
     font-size: 12px;
     transform: scale(1.5, 1.5);
   }
