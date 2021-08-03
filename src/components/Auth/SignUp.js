@@ -71,7 +71,6 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 			emailInput.trim() === '' ||
 			password.trim() === '' ||
 			confirm.trim() === '' ||
-			username.trim() === '' ||
 			name.trim() === '' ||
 			surname.trim() === ''
 		) {

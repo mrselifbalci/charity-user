@@ -1,79 +1,112 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './News.css';
 import axios from 'axios';
+import './News.css';
+import { Link } from 'react-router-dom';
 
-const News = () => { 
-	// const {id} =useParams();
-	const [posts, setPosts] = useState([]);
-	const [viewmore, setViewmore] = useState(0);
+const News = () => {
+	const [news, setNews] = useState([]);
+	const [page, setPage] = useState(1);
+	const [slider, setSlider] = useState([]);
+	const [url, setUrl] = useState();
+	const [navPages, setNavPages] = useState();
+
 	useEffect(() => {
 		axios
-			.get('https://mern-brothers.herokuapp.com/posts')
-			.then((res) => setPosts(res.data.docs))
+			.get('https://charity-backend-july.herokuapp.com/slider/type/latest-news')
+			.then((res) => {
+				setSlider(res.data.data[0]);
+				setUrl(res.data.data[0].mediaId.url);
+
+				console.log(slider);
+			})
 			.catch((err) => console.log(err));
-			console.log()
-	}, []); 
+		axios
+			.get(`https://charity-backend-july.herokuapp.com/news?page=${page}&limit=2`)
+			.then((res) => {
+				setNews(res.data.data);
+				setNavPages(Math.ceil(res.data.total / 2));
+			})
+			.catch((err) => console.log(err));
+	}, [url, page]);
 
-	const viewMore = () => {
-		if (posts.length - 2 <= viewmore) {
-			document.querySelector('.allPosts').textContent =
-				'No more stories to view...';
-		} else {
-			setViewmore(viewmore + 2);
-		}
-	};
+	const pages = [];
 
-	// console.log(posts);
+	for (let i = 1; i <= navPages; i++) {
+		pages.push(i);
+	}
+
 	return (
 		<div>
-			<div className="newss-bg-img"></div>
-			<div className="newss-text">
-				<span>
-					Lorem Ipsum is simply dummy text of the printing and typesetting
-					industry. Lorem Ipsum has been the industry's standard dummy text
-					ever since the 1500s, when an unknown printer took a galley of
-					type and scrambled it to make a type specimen book.{' '}
-				</span>
+			<div
+				className='latest-news-header-image'
+				style={{ backgroundImage: `url(${url})` }}></div>
+			<div className='latest-news-header-img-quote'>
+				<span>{slider.quote}</span>
 			</div>
-			<div className="newss-header">
-				<p>Latest News</p>
+			<div className='latest-news-header-title'>{slider.title}</div>
+			<div className='latest-news-container'>
+				{news.map((newsItem) => (
+					<div className='latest-news-single-news-container'>
+						<img src={newsItem.mediaId.url} alt='latest-news-pic' />
+						<div>
+							<h1 className='latest-news-single-news-title'>
+								{newsItem.title}
+							</h1>
+							<p className='latest-news-single-news-content'>
+								{newsItem.summary.slice(0, 500)}...
+							</p>
+							<Link to={`/newsdetail/${newsItem._id}`}>
+								<button className='latest-news-single-news-read-more-btn'>
+									Read More
+								</button>
+							</Link>
+						</div>
+					</div>
+				))}
+				<div className='latest-news-page-navigation'>
+					<button
+						className='latest-news-page-navigation-btn'
+						onClick={(e) => {
+							e.preventDefault();
+							if (page > 1) {
+								setPage(page - 1);
+							} else {
+								setPage(1);
+							}
+						}}>
+						&laquo; Previous
+					</button>
+					<h3>
+						{page} / {navPages}
+					</h3>
+					<button
+						className='latest-news-page-navigation-btn'
+						onClick={(e) => {
+							e.preventDefault();
+							if (page + 1 <= navPages) {
+								setPage(page + 1);
+							} else {
+								setPage(navPages);
+							}
+						}}>
+						Next &raquo;
+					</button>
+				</div>
+				<div className='latest-news-go-to-page-container'>
+					<label htmlFor='latest-news-go-to-page'>Go to Page</label>
+					<input
+						type='number'
+						id='latest-news-go-to-page'
+						onChange={(e) => {
+							if (e.target.value >= 1 && e.target.value <= navPages) {
+								setPage(e.target.value);
+							} else {
+								setPage(page);
+							}
+						}}
+					/>
+				</div>
 			</div>
-			<table id="news-area">
-				<br />
-				{posts.length !== 0 &&
-					posts
-						.slice(posts.length - 2 - viewmore, posts.length)
-						.reverse()
-						.map((post) => (
-							<tr className="news-area">
-								<td className="news-area-img">				
-											<img src={post.post_img_url} alt="" />						
-								</td>
-
-								<td>
-									<br />
-									<tr className="news-area-header">
-										<h2>{post.title}</h2>
-									</tr>
-									<tr className="news-area-text">
-										<br />
-										<p> {post.summary}</p>
-									</tr>
-									<tr className="tr-readmore">
-										<Link to={`/newsdetail/${post.id}`} className="news-btn-readmore">
-											Read More
-										</Link>
-									</tr>
-								</td>
-							</tr>
-						))}<br/>
-				<tr className="allPosts"></tr>
-				<tr className="tr-btn-viewmore">
-				
-					<button id="news-btn-viewmore" onClick={viewMore}>View More</button>
-				</tr>
-			</table>
 		</div>
 	);
 };
