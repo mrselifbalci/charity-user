@@ -53,13 +53,13 @@ const News = () => {
 								{newsItem.title}
 							</h1>
 							<p className='latest-news-single-news-content'>
-								{newsItem.summary.slice(0, 500)}...
+								{newsItem.summary.slice(0, 270)}...{'  '}
+								<small>
+									<a href={`/newsdetail/${newsItem._id}`}>
+										continue reading &raquo;
+									</a>
+								</small>
 							</p>
-							<Link to={`/newsdetail/${newsItem._id}`}>
-								<button className='latest-news-single-news-read-more-btn'>
-									Read More
-								</button>
-							</Link>
 						</div>
 					</div>
 				))}
