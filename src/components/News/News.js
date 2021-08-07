@@ -59,7 +59,7 @@ const News = () => {
 								{newsItem.title}
 							</h1>
 							<p className='latest-news-single-news-content'>
-								{newsItem.summary.slice(0, 270)}...{'  '}
+								{newsItem.summary.slice(0, 250)}...{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;

@@ -81,8 +81,8 @@
 	margin-right: 10px;
 	font-family: Roboto;
 	font-style: normal;
-	font-size: 18px;
-	line-height: 1.6;
+	font-size: 21.5px;
+	line-height: 1.5;
 	margin-bottom: 50px;
 }
 
@@ -132,6 +132,10 @@
 	color: #347ca5;
 }
 
+#latest-news-go-to-page {
+	text-align: center;
+}
+
 /*******************************************/
 @media (max-width: 1366px) {
 }
@@ -166,7 +170,7 @@
 	}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 779px) {
 	.latest-news-header-image {
 		height: 333px;
 	}
