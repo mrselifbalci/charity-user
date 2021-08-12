@@ -58,8 +58,16 @@ const News = () => {
 							<h1 className='latest-news-single-news-title'>
 								{newsItem.title}
 							</h1>
-							<p className='latest-news-single-news-content'>
-								{newsItem.summary.slice(0, 250)}...{'  '}
+							<p className='latest-news-single-news-content-large-size'>
+								{newsItem.summary.slice(0, 500)}...{'  '}
+								<small>
+									<a href={`/newsdetail/${newsItem._id}`}>
+										continue reading &raquo;
+									</a>
+								</small>
+							</p>
+							<p className='latest-news-single-news-content-medium-size'>
+								{newsItem.summary.slice(0, 300)}...{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;
