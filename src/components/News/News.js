@@ -47,19 +47,33 @@ const News = () => {
 			<div className='latest-news-container'>
 				{news.map((newsItem) => (
 					<div className='latest-news-single-news-container'>
-						<img src={newsItem.mediaId.url} alt='latest-news-pic' />
+						<div className='latest-news-single-news-img-container'>
+							<img
+								src={newsItem.mediaId.url}
+								alt='latest-news-pic'
+								className='latest-news-single-news-img'
+							/>
+						</div>
 						<div>
 							<h1 className='latest-news-single-news-title'>
 								{newsItem.title}
 							</h1>
 							<p className='latest-news-single-news-content'>
-								{newsItem.summary.slice(0, 500)}...
+								{newsItem.summary.slice(0, 250)}...{'  '}
+								<small>
+									<a href={`/newsdetail/${newsItem._id}`}>
+										continue reading &raquo;
+									</a>
+								</small>
 							</p>
-							<Link to={`/newsdetail/${newsItem._id}`}>
-								<button className='latest-news-single-news-read-more-btn'>
-									Read More
-								</button>
-							</Link>
+							<p className='latest-news-single-news-content-small-size'>
+								{newsItem.summary.slice(0, 100)}...{'  '}
+								<small>
+									<a href={`/newsdetail/${newsItem._id}`}>
+										continue reading &raquo;
+									</a>
+								</small>
+							</p>
 						</div>
 					</div>
 				))}
