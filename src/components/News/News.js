@@ -117,7 +117,7 @@ const News = () => {
 				<div className='latest-news-go-to-page-container'>
 					<label htmlFor='latest-news-go-to-page'>Go to Page</label>
 					<input
-						type='number'
+						type='text'
 						id='latest-news-go-to-page'
 						onChange={(e) => {
 							if (e.target.value >= 1 && e.target.value <= navPages) {
