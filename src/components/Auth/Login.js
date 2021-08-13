@@ -24,7 +24,24 @@ const Login = ({ setIsLoggedIn }) => {
 				password: googleId
 			})
 			.then((res) => {
-				sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+				if(res.data.message === 'Email does not exist.') {
+					document.querySelector('.valid').textContent = 'Email does not exist.'
+					return 
+				}
+
+				if(res.data.message === 'Wrong password' || res.data.status === false) {
+					document.querySelector('.valid').textContent = 'Wrong password.'
+					return 
+				}
+
+				if(res.data.status === true) {
+					sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+					setTimeout(() => {
+						setUserExist(true);
+						setIsLoggedIn(true);
+					}, 100)
+				}
+				console.log(res.data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -52,11 +69,24 @@ const Login = ({ setIsLoggedIn }) => {
 					password: password
 				};
 		axios
-			.post('http://localhost:5001/users/signin', username)
+			.post('https://charity-backend-july.herokuapp.com/users/signin', username)
 			.then((res) => {
-				setUserExist(true);
-				setIsLoggedIn(true);
-				sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+				if(res.data.message === 'Email does not exist.') {
+					document.querySelector('.valid').textContent = 'Email does not exist.'
+					return 
+				}
+
+				if(res.data.message === 'Wrong password' || res.data.status === false) {
+					document.querySelector('.valid').textContent = 'Wrong password.'
+					return 
+				}
+				if(res.data.status === true) {
+					sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+					setTimeout(() => {
+						setUserExist(true);
+						setIsLoggedIn(true);
+					}, 100)
+				}
 
 				console.log(res.data);
 			})

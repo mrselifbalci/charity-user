@@ -58,8 +58,16 @@ const News = () => {
 							<h1 className='latest-news-single-news-title'>
 								{newsItem.title}
 							</h1>
-							<p className='latest-news-single-news-content'>
-								{newsItem.summary.slice(0, 250)}...{'  '}
+							<p className='latest-news-single-news-content-large-size'>
+								{newsItem.summary.slice(0, 550)}...{'  '}
+								<small>
+									<a href={`/newsdetail/${newsItem._id}`}>
+										continue reading &raquo;
+									</a>
+								</small>
+							</p>
+							<p className='latest-news-single-news-content-medium-size'>
+								{newsItem.summary.slice(0, 350)}...{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;
@@ -67,7 +75,7 @@ const News = () => {
 								</small>
 							</p>
 							<p className='latest-news-single-news-content-small-size'>
-								{newsItem.summary.slice(0, 100)}...{'  '}
+								{newsItem.summary.slice(0, 130)}...{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;
@@ -109,7 +117,7 @@ const News = () => {
 				<div className='latest-news-go-to-page-container'>
 					<label htmlFor='latest-news-go-to-page'>Go to Page</label>
 					<input
-						type='number'
+						type='text'
 						id='latest-news-go-to-page'
 						onChange={(e) => {
 							if (e.target.value >= 1 && e.target.value <= navPages) {
