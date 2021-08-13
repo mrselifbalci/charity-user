@@ -4,7 +4,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import './Login.css';
 import GoogleLogin from 'react-google-login';
 import googleLogo from './grommet-icons_google.jpg';
-require('dotenv');
+require('dotenv'); 
 
 const Login = ({ setIsLoggedIn }) => {
 	const [ email, setEmail ] = useState('');
@@ -46,7 +46,13 @@ const Login = ({ setIsLoggedIn }) => {
 			.catch((err) => {
 				console.log(err);
 			});
-	};
+		window.scroll(0, 0);
+		document.querySelector('.valid').textContent = 'Signed up successfully. Redirecting to homepage...';
+		setTimeout(() => {
+			setIsLoggedIn(true);
+			history.push('/');
+		}, 1500);
+	}; 
 
 	const login = (e) => {
 		if (email.trim() === '' || password.trim() === '') {
