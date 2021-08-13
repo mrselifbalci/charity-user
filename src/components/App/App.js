@@ -63,7 +63,7 @@ export default function App() {
 						path="/"
 						render={() => (
 							<React.Fragment>
-								<Slider />
+								{/* <Slider /> */}
 								<NewsHomePage />
 							</React.Fragment>
 						)}
