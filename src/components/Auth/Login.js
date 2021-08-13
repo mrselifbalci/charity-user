@@ -19,22 +19,33 @@ const Login = ({ setIsLoggedIn }) => {
 				'Something went wrong try again or sign in manually');
 		const { email, googleId } = response.profileObj;
 		axios
-			.post('http://localhost:5001/users/signin', {
+			.post('https://charity-backend-july.herokuapp.com/users/signin', {
 				email: email,
 				password: googleId
 			})
 			.then((res) => {
-				sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+				if(res.data.message === 'Email does not exist.') {
+					document.querySelector('.valid').textContent = 'Email does not exist.'
+					return 
+				}
+
+				if(res.data.message === 'Wrong password' || res.data.status === false) {
+					document.querySelector('.valid').textContent = 'Wrong password.'
+					return 
+				}
+
+				if(res.data.status === true) {
+					sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+					setTimeout(() => {
+						setUserExist(true);
+						setIsLoggedIn(true);
+					}, 100)
+				}
+				console.log(res.data);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-		window.scroll(0, 0);
-		document.querySelector('.valid').textContent = 'Signed up successfully. Redirecting to homepage...';
-		setTimeout(() => {
-			setIsLoggedIn(true);
-			history.push('/');
-		}, 1500);
 	};
 
 	const login = (e) => {
@@ -52,11 +63,24 @@ const Login = ({ setIsLoggedIn }) => {
 					password: password
 				};
 		axios
-			.post('http://localhost:5001/users/signin', username)
+			.post('https://charity-backend-july.herokuapp.com/users/signin', username)
 			.then((res) => {
-				setUserExist(true);
-				setIsLoggedIn(true);
-				sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+				if(res.data.message === 'Email does not exist.') {
+					document.querySelector('.valid').textContent = 'Email does not exist.'
+					return 
+				}
+
+				if(res.data.message === 'Wrong password' || res.data.status === false) {
+					document.querySelector('.valid').textContent = 'Wrong password.'
+					return 
+				}
+				if(res.data.status === true) {
+					sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+					setTimeout(() => {
+						setUserExist(true);
+						setIsLoggedIn(true);
+					}, 100)
+				}
 
 				console.log(res.data);
 			})
