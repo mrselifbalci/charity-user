@@ -8,11 +8,13 @@ const Footer = () => {
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [savedMessage, setSavedMessage] = useState(false);
+	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com';
 
 	const subscribeLetter = (e) => {
 		e.preventDefault();
 		axios
-			.post('https://mern-brothers.herokuapp.com/subscribers', {
+			.post(`${API_BASE_URL}/emaillist`, {
+				type: 'newsletter',
 				firstname: firstName,
 				lastname: lastName,
 				email: email,
@@ -28,60 +30,60 @@ const Footer = () => {
 
 	return (
 		<div>
-			<div id="footer">
-				<h1 id="form-title">Sign up for our newsletter</h1>
-				<div id="form">
-					<form id="form-footer" onSubmit={subscribeLetter}>
+			<div id='footer'>
+				<h1 id='form-title'>Sign up for our newsletter</h1>
+				<div id='form'>
+					<form id='form-footer' onSubmit={subscribeLetter}>
 						<input
-							className="form-input"
-							type="text"
-							placeholder="First Name"
+							className='form-input'
+							type='text'
+							placeholder='First Name'
 							required
 							onChange={(e) => setFirstName(e.target.value)}
 							value={firstName}
 						/>
 						<input
-							className="form-input"
-							type="text"
-							placeholder="Last Name"
+							className='form-input'
+							type='text'
+							placeholder='Last Name'
 							required
 							onChange={(e) => setLastName(e.target.value)}
 							value={lastName}
 						/>
 						<input
-							className="form-input"
-							type="email"
-							placeholder="Email"
+							className='form-input'
+							type='email'
+							placeholder='Email'
 							required
 							onChange={(e) => setEmail(e.target.value)}
 							value={email}
 						/>
-						<button id="form-btn" type="submit">
+						<button id='form-btn' type='submit'>
 							Send
 						</button>
 					</form>
 					<br />
 					<div>
 						{savedMessage ? (
-							<h3 className="newsletter-saved-message">
+							<h3 className='newsletter-saved-message'>
 								Thank you for subscribing to our newsletter...
 							</h3>
 						) : null}
 					</div>
 				</div>
 			</div>
-			<div className="footer-nav">
+			<div className='footer-nav'>
 				<ul>
-					<Link to="/terms" className="footer-nav-links">
+					<Link to='/terms' className='footer-nav-links'>
 						Terms & Conditions
 					</Link>
-					<Link to="/policies" className="footer-nav-links">
+					<Link to='/policies' className='footer-nav-links'>
 						Privacy & Cookie Policies
 					</Link>
-					<Link to="/contact-us" className="footer-nav-links">
+					<Link to='/contact-us' className='footer-nav-links'>
 						Contact Us
 					</Link>
-					<li className="footer-nav-links">&copy;2021 SoftInnovas</li>
+					<li className='footer-nav-links'>&copy;2021 SoftInnovas</li>
 				</ul>
 			</div>
 		</div>
