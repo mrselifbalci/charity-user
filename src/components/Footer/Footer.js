@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Footer.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,30 +8,41 @@ const Footer = () => {
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [savedMessage, setSavedMessage] = useState(false);
+	const [subscriber, setSubscriber] = useState('');
+	const [existingEmailMessage, setExistingEmailMessage] = useState(false);
 	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com/emaillist';
+
+	useEffect(() => {
+		axios
+			.get(`${API_BASE_URL}/email/${email}`)
+			.then((res) => {
+				setSubscriber(res.data.data);
+			})
+			.catch((err) => console.log(err));
+	}, [email]);
 
 	const subscribeLetter = async (e) => {
 		e.preventDefault();
 
-		await axios
-			.get(`${API_BASE_URL}/email/${email}`)
-			.then((res) => console.log(res.data))
-			.catch((err) => console.log(err));
+		if (subscriber.length === 0) {
+			await axios
+				.post(API_BASE_URL, {
+					type: 'newsletter',
+					firstname: firstName,
+					lastname: lastName,
+					email: email,
+				})
+				.then((res) => console.log(res.data))
+				.catch((err) => console.log(err));
 
-		await axios
-			.post(API_BASE_URL, {
-				type: 'newsletter',
-				firstname: firstName,
-				lastname: lastName,
-				email: email,
-			})
-			.then((res) => console.log(res.data))
-			.catch((err) => console.log(err));
-
-		setFirstName('');
-		setLastName('');
-		setEmail('');
-		setSavedMessage(true);
+			setFirstName('');
+			setLastName('');
+			setEmail('');
+			setSavedMessage(true);
+			setExistingEmailMessage(false);
+		} else {
+			setExistingEmailMessage(true);
+		}
 	};
 
 	return (
@@ -45,7 +56,11 @@ const Footer = () => {
 							type='text'
 							placeholder='First Name'
 							required
-							onChange={(e) => setFirstName(e.target.value)}
+							onChange={(e) => {
+								setFirstName(e.target.value);
+								setSavedMessage(false);
+								setExistingEmailMessage(false);
+							}}
 							value={firstName}
 						/>
 						<input
@@ -53,7 +68,11 @@ const Footer = () => {
 							type='text'
 							placeholder='Last Name'
 							required
-							onChange={(e) => setLastName(e.target.value)}
+							onChange={(e) => {
+								setLastName(e.target.value);
+								setSavedMessage(false);
+								setExistingEmailMessage(false);
+							}}
 							value={lastName}
 						/>
 						<input
@@ -61,7 +80,11 @@ const Footer = () => {
 							type='email'
 							placeholder='Email'
 							required
-							onChange={(e) => setEmail(e.target.value)}
+							onChange={(e) => {
+								setEmail(e.target.value);
+								setExistingEmailMessage(false);
+								setSavedMessage(false);
+							}}
 							value={email}
 						/>
 						<button id='form-btn' type='submit'>
@@ -69,13 +92,20 @@ const Footer = () => {
 						</button>
 					</form>
 					<br />
-					<div>
-						{savedMessage ? (
+					{savedMessage ? (
+						<div>
 							<h3 className='newsletter-saved-message'>
 								Thank you for subscribing to our newsletter...
 							</h3>
-						) : null}
-					</div>
+						</div>
+					) : null}
+					{existingEmailMessage ? (
+						<div>
+							<h3 className='newsletter-saved-message'>
+								This email has already been subscribed....
+							</h3>
+						</div>
+					) : null}
 				</div>
 			</div>
 			<div className='footer-nav'>

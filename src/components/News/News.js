@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './News.css';
-import { Link } from 'react-router-dom';
 
 const News = () => {
 	const [news, setNews] = useState([]);
@@ -16,8 +15,6 @@ const News = () => {
 			.then((res) => {
 				setSlider(res.data.data[0]);
 				setUrl(res.data.data[0].mediaId.url);
-
-				console.log(slider);
 			})
 			.catch((err) => console.log(err));
 		axios
