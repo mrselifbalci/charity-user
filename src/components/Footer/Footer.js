@@ -8,18 +8,26 @@ const Footer = () => {
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [savedMessage, setSavedMessage] = useState(false);
-	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com';
+	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com/emaillist';
 
-	const subscribeLetter = (e) => {
+	console.log(`${API_BASE_URL}/email/${email}`);
+
+	const subscribeLetter = async (e) => {
 		e.preventDefault();
-		axios
-			.post(`${API_BASE_URL}/emaillist`, {
+
+		await axios
+			.get(`${API_BASE_URL}/email/${email}`)
+			.then((res) => console.log(res.data))
+			.catch((err) => console.log(err));
+
+		await axios
+			.post(API_BASE_URL, {
 				type: 'newsletter',
 				firstname: firstName,
 				lastname: lastName,
 				email: email,
 			})
-			.then((res) => console.log(res))
+			.then((res) => console.log(res.data))
 			.catch((err) => console.log(err));
 
 		setFirstName('');
