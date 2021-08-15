@@ -10,8 +10,6 @@ const Footer = () => {
 	const [savedMessage, setSavedMessage] = useState(false);
 	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com/emaillist';
 
-	console.log(`${API_BASE_URL}/email/${email}`);
-
 	const subscribeLetter = async (e) => {
 		e.preventDefault();
 
