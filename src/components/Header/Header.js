@@ -13,23 +13,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn, searchFunc }) => {
 	const history = useHistory();
 	const [checked, setChecked] = useState(false);
 
-	useEffect(() => {
-		axios
-			.get('https://mern-brothers.herokuapp.com/posts')
-			.then((res) => setPosts(res.data))
-			.catch((err) => console.log(err));
-			
-	}, []);
 
 	const onSubmitSearch = (e) => {
 		e.preventDefault();
-		const results = [];
-		for (let i = 0; i < posts.length; i++) {
-			if (posts[i].title.toLowerCase().search(search.toLowerCase()) !== -1) {
-				results.push(posts[i].id);
-			}
-		}
-		searchFunc(results);
+		axios.get(`http://localhost:5001/news/query/${search}`)
+			.then(data => {
+				searchFunc(data.data.data);
+			}).catch(err => console.log(err))
 		history.push('/search-results');
 	};
 

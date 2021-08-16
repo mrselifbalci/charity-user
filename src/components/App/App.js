@@ -36,26 +36,13 @@ export default function App() {
 		}
 	},[])
 
-	const searchFunc = async (val) => {
-		let results = [];
-		for (let i = 0; i < val.length; i++) {
-			await axios
-				.get(`https://mern-brothers.herokuapp.com/posts/${val[i]}`)
-				.then((res) => results.push(res.data))
-				.catch((err) => console.log(err));
-		}
-
-		setSearchResults(results);
-		window.scroll(0, 0)
-	};
-
 	return (
 		<div>
 			<Router>
 				<Header
 					isLoggedIn={isLoggedIn}
 					setIsLoggedIn={setIsLoggedIn}
-					searchFunc={searchFunc}
+					searchFunc={setSearchResults}
 				/>
 				<Switch>
 					<Route
