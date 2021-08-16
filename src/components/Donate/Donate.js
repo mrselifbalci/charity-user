@@ -15,7 +15,7 @@ const Donate = () => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post('https://mern-brothers.herokuapp.com/paypal-donations', {
+      .post('https://charity-backend-july.herokuapp.com/emaillist', {
         firstname: firstname,
         lastname: lastname,
         email: email,
