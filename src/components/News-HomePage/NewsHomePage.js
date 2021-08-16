@@ -16,7 +16,7 @@ const NewsHomePage = () => {
 			.catch((err) => console.log(err));
 
 		axios
-		.get('https://charity-backend-july.herokuapp.com/slider/type/involve')
+		.get('https://charity-backend-july.herokuapp.com/slider/type/news-home')
 		.then((res) => {
 			setSlider(res.data.data[0]);
 			setImage(res.data.data[0].mediaId.url);
@@ -34,17 +34,17 @@ const NewsHomePage = () => {
 			<div id="slider-box">
 			<img id="slider-pic" src={image} alt="pic" />
 
-			<p id="quote-text">
-				<span>
+			<div id="quote-text">
+				<p className="quote-text">
 					{slider.quote}
-				</span>
-				<br />
-				<span id="quote-person">{slider.quoteAuthor}</span>
-			</p>
+				</p>
+				
+				<p className="quote-person">{slider.quoteAuthor}</p>
+			</div>
 		</div>
 
 			<div id="news-div">
-			<span id="newsTitle">The difference you make</span>
+			<span id="newsTitle">{slider.title}</span>
 		
 
 			<div id="newsHomePage">
