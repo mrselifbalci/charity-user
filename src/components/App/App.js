@@ -35,6 +35,7 @@ export default function App() {
 		}
 	}, []);
 
+
 	const searchFunc = async (val) => {
 		let results = [];
 		for (let i = 0; i < val.length; i++) {
@@ -48,13 +49,14 @@ export default function App() {
 		window.scroll(0, 0);
 	};
 
+
 	return (
 		<div>
 			<Router>
 				<Header
 					isLoggedIn={isLoggedIn}
 					setIsLoggedIn={setIsLoggedIn}
-					searchFunc={searchFunc}
+					searchFunc={setSearchResults}
 				/>
 				<Switch>
 					<Route

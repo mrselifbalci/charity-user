@@ -1,0 +1,20 @@
+search-results-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-results-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 100px auto 0 auto;
+}
+
+.search-results-text p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #347ca5;
+    font-size: xx-large;
+}
