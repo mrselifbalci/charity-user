@@ -13,16 +13,16 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 	const [ username, setUsername ] = useState('');
 	const [ confirm, setConfirm ] = useState('');
 	const [ existEmail, setExistEmail ] = useState(false);
-	const [ users, setUsers ] = useState(null);
 	const [ refresh, setRefresh ] = useState(false);
 
 	const history = useHistory();
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:5001/users')
+			.get('https://charity-backend-july.herokuapp.com/users')
 			.then((res) => {
-				setUsers(res.data);
+				// setUsers(res.data);
+				console.log(res.data)
 			})
 			.catch((err) => console.log(err));
 	}, []);
@@ -43,6 +43,18 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 				password: googleId
 			})
 			.then((res) => {
+				window.scroll(0, 0);
+				if(res.data.status === false) {
+					document.querySelector('.valid').textContent = 'Email already exist or something went wrong.'
+					return
+				}
+				if(res.data.message === 'Email does not exist.') {
+					document.querySelector('.valid').textContent = 'Email does not exist.'
+					return 
+				} else if(res.data.message === 'Wrong password' || res.data.status === false) {
+					document.querySelector('.valid').textContent = 'Wrong password.'
+					return 
+				} 
 				axios
 					.post('https://charity-backend-july.herokuapp.com/users/signin', {
 						email: email,
@@ -50,16 +62,16 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 					})
 					.then((res) => {
 						sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+						window.scroll(0, 0);
+						document.querySelector('.valid').textContent = 'Signed up successfully. Redirecting to homepage...';
+						setTimeout(() => {
+							setIsLoggedIn(true);
+							history.push('/');
+						}, 1500);
 					})
 					.catch((err) => {
 						console.log(err);
 					});
-				window.scroll(0, 0);
-				document.querySelector('.valid').textContent = 'Signed up successfully. Redirecting to homepage...';
-				setTimeout(() => {
-					setIsLoggedIn(true);
-					history.push('/');
-				}, 1500);
 			})
 			.catch((err) => console.log(err));
 	};
@@ -81,16 +93,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 			document.querySelector('.valid').textContent = 'Password did not match';
 			return;
 		}
-		if (users !== null) {
-			for (let i = 0; i < users.length; i++) {
-				if (users[i].email === emailInput.trim().toLowerCase()) {
-					document.querySelector('.valid').textContent = 'Email is already taken';
-					return;
-				}
-			}
-		}
-
-		if (!existEmail) {
+	
 			axios
 				.post('https://charity-backend-july.herokuapp.com/users/signup', {
 					firstname: name,
@@ -101,6 +104,10 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 				})
 				.then((res) => {
 					window.scroll(0, 0);
+					if(res.data.status === false) {
+						document.querySelector('.valid').textContent = 'Email already exist or something went wrong.'
+						return
+					}
 					axios
 						.post('https://charity-backend-july.herokuapp.com/users/signin', {
 							email: emailInput,
@@ -109,6 +116,15 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 						.then((res) => {
 							setIsLoggedIn(true);
 							sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+							document.querySelector('.valid').textContent = 'Signed up successfully. Redirecting to homepage...';
+							setExistEmail(true);
+							setConfirm('');
+							setEmail('');
+							setPassword('');
+							setName('');
+							setSurname('');
+							setUsername('');
+							setRefresh(!refresh);
 
 							console.log(res.data);
 						})
@@ -123,16 +139,7 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 					console.log(res.data);
 				})
 				.catch((err) => console.log(err));
-			document.querySelector('.valid').textContent = 'Signed up successfully. Redirecting to homepage...';
-			setExistEmail(true);
-			setConfirm('');
-			setEmail('');
-			setPassword('');
-			setName('');
-			setSurname('');
-			setUsername('');
-			setRefresh(!refresh);
-		}
+			
 	};
 
 	return (
