@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import "./Donate.css";
 import { Link } from "react-router-dom";
 import Paypal from "./Paypal";
@@ -11,6 +11,23 @@ const Donate = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const[classone,setClassOne] = useState("donate")
+  const[donate,setDonate] =useState("")
+  const [url, setUrl] = useState();
+
+  useEffect(() => {
+			axios
+		.get('https://charity-backend-july.herokuapp.com/slider/type/donate')
+		.then((res) => {
+      setDonate(res.data.data[0]);
+      setUrl(res.data.data[0].mediaId.url);
+		
+
+			console.log(donate.title);
+		})
+		.catch((err) => console.log(err));	
+	},url);
+ 
+
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -20,6 +37,7 @@ const Donate = () => {
         lastname: lastname,
         email: email,
         message: message,
+        type:"paypal",
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -35,15 +53,17 @@ const Donate = () => {
   return (
     <div className="main">
       <div className="flex-container">
-        <div className="div-picture"></div>
+        <div className="div-picture" style={{backgroundImage:`url(${url})`}}>
+          {/* <img src={url} alt=""/> */}
+        </div>
         <div className="text">
           <p>
-            Your support could power a kinder, fairer, more friendly future.
+           {donate.quote}
           </p>
         </div>
         <div className={classone}>
           <div className="donate-header">
-            <h1>DONATE NOW</h1>
+            <h1>{donate.title}</h1>
           </div>
 
           <form onSubmit={submitForm}>
