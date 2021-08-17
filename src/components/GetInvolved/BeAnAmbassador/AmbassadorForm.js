@@ -132,7 +132,8 @@ const AmbassadorForm = () => {
 
 	return (
 		<div>
-			<div className="ambassadorForm-container">
+			elif
+			{/* <div className="ambassadorForm-container">
 				<img
 					src={imageHeader}
 					alt="Avatar"
@@ -282,7 +283,7 @@ const AmbassadorForm = () => {
 				<button className="donate-goods-form-btn-popup" onClick={() => history.push('/')}>
 					Back to home page
 				</button>
-			</Modal>
+			</Modal> */}
 		</div>
 	);
 };
