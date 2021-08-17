@@ -18,3 +18,7 @@ search-results-main {
     color: #347ca5;
     font-size: xx-large;
 }
+
+.search-results-content-area {
+    background: #e5e5e5;
+}

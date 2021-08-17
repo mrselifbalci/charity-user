@@ -110,10 +110,10 @@ const Footer = () => {
 			</div>
 			<div className='footer-nav'>
 				<ul>
-					<Link to='/terms' className='footer-nav-links'>
+					<Link to="/static/Terms & Conditions" className="footer-nav-links">
 						Terms & Conditions
 					</Link>
-					<Link to='/policies' className='footer-nav-links'>
+					<Link to="/static/Privacy & Cookie Policies" className="footer-nav-links">
 						Privacy & Cookie Policies
 					</Link>
 					<Link to='/contact-us' className='footer-nav-links'>

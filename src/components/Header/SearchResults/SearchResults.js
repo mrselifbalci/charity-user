@@ -26,7 +26,7 @@ const SearchResults = ({ searchResults}) => {
 			<div className="search-results-text">
 				<p>Search Results</p>
 			</div>
-			<div>
+			<div className="search-results-content-area">
 			<table id="news-area">
 				<br />
 				{posts.map((newsItem) => (
