@@ -6,16 +6,29 @@ import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
 const ContactUs = () => {
-	useEffect(() => {
-		window.scroll(0, 0);
-	}, []);
-
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
+	const [companyInfo, setCompanyInfo] = useState('');
+	const [FBLink, setFBLink] = useState('');
+	const [TwitterLink, setTwitterLink] = useState('');
+	const [InstagramLink, setInstagramLink] = useState('');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com';
+
+	useEffect(() => {
+		axios
+			.get(`${API_BASE_URL}/companyinfo`)
+			.then((res) => {
+				setCompanyInfo(res.data.response[0]);
+				setFBLink(res.data.response[0].socialMedia[0].Facebook);
+				setTwitterLink(res.data.response[0].socialMedia[1].Twitter);
+				setInstagramLink(res.data.response[0].socialMedia[2].Instagram);
+			})
+			.catch((err) => console.log(err));
+		window.scroll(0, 0);
+	}, []);
 
 	const submitMessage = (e) => {
 		e.preventDefault();
@@ -98,13 +111,13 @@ const ContactUs = () => {
 							Address
 						</h2>
 						<h3 className='contact-us-communication-address-text'>
-							Senate House Malet Street London WC1E 7HU
+							{companyInfo.address}
 						</h3>
 					</div>
 					<div className='contact-us-communication-phone'>
 						<h2 className='contact-us-communication-phone-title'>Phone</h2>
 						<h3 className='contact-us-communication-phone-text'>
-							020 3451 5677
+							{companyInfo.phone}
 						</h3>
 					</div>
 					<div className='contact-us-communication-follow-us'>
@@ -113,25 +126,26 @@ const ContactUs = () => {
 						</h2>
 						<div style={{ textAlign: 'center' }}>
 							<a
-								href='https://www.facebook.com/'
+								href={FBLink}
 								target='_blank'
 								rel='noreferrer'
 								className='contact-us-communication-sm-logo-link'>
 								<AiFillFacebook className='contact-us-communication-sm-logo' />
 							</a>
 							<a
-								href='https://www.twitter.com/'
+								href={TwitterLink}
 								target='_blank'
 								rel='noreferrer'
 								className='contact-us-communication-sm-logo-link'>
 								<AiFillTwitterSquare className='contact-us-communication-sm-logo' />
 							</a>
 							<a
-								href='https://www.instagram.com/'
+								href={InstagramLink}
 								target='_blank'
 								rel='noreferrer'
 								className='contact-us-communication-sm-logo-link'>
 								<AiOutlineInstagram className='contact-us-communication-sm-logo' />
+								{console.log(InstagramLink)}
 							</a>
 						</div>
 					</div>
