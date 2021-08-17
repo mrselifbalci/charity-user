@@ -1,67 +1,99 @@
-import React,{useEffect,useState,useLayoutEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './NewsDetail.css'
+import './NewsDetail.css';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import ckeditor from '@ckeditor/ckeditor5-react';
 
-
 export default function NewsDetail() {
+	useLayoutEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-       }, [])
-    
-    const{id}=useParams()
-    const[post,setPost]=useState([])
- 
-    useEffect(() => {
-        axios.get(`https://mern-brothers.herokuapp.com/posts/${id}`)
-        .then(res=>{ 
-            setPost(res.data)
-           
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-    }, [id])
+	const { id } = useParams();
+	const [news, setNews] = useState([]);
+	const [urlMainImage, setUrlMainImage] = useState('');
+	const [urlProfilePic, setUrlProfilePic] = useState('');
 
-    
- 
+	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com';
 
-    return (
-        <div>
-            <div className="slider-container">
-                    <div style={{backgroundImage:`url(${post.post_img_url})`,paddingTop:"50px",height:"575px", backgroundPosition: 'center',backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}></div> 
-                    <img className="donatee-img"src={post.donatee_img_url} alt='donatee'/>
+	useEffect(() => {
+		axios
+			.get(`${API_BASE_URL}/news/${id}`)
+			.then((res) => {
+				setNews(res.data.data);
+				setUrlMainImage(res.data.data.mediaId.url);
+				setUrlProfilePic(res.data.data.quoteAuthorMedia.url);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [id]);
 
-                    <p className="quote">
-                        <span>"{post.donatee_desc}"</span>
-                        <br/>
-                        <span className="donatee-name">{post.donatee_name}</span>
-                    </p>
-            </div>
-            <div className="title-summary" >
-                    <h1> {post.title}</h1>
-                    <p> {post.summary}</p>
-            </div>
-            <div className="content-1">
-                <img className="content-1-img" src={post.content_img_1} alt="body_img" />
-                <p className="content-1-text">{post.content_1}</p>
-            </div>
-            <div className="content-2">
-                <p className="content-2-text">{post.content_2}</p>
-            </div>
-            <div className="content-3">
-                 <p className="content-3-text">{post.content_3}</p>
-                 <img className="content-2-img" src={post.content_img_2} alt="body_img"/>
-            </div>
-            <div>
-                <p className="content-4-text">{post.content_4}</p>
-            </div>
-           
-            
-        </div>
-    )
-} 
- 
+	return (
+		<div>
+			<div
+				className='news-details-header-image'
+				style={{ backgroundImage: `url(${urlMainImage})` }}></div>
+			<div>
+				<img
+					src={urlProfilePic}
+					alt='author-pic'
+					className='news-details-author-img'
+				/>
+				<div className='news-details-quote-container'>
+					<p className='news-details-quote'>
+						"{news.quote}" <br />{' '}
+						<span className='news-details-quote-author'>
+							{news.quoteAuthor}
+						</span>
+					</p>
+				</div>
+			</div>
+			<div className='news-details-news-title-container'>
+				<h1 className='news-details-news-title'>{news.title}</h1>
+				<p className='news-details-news-summary'>{news.summary}</p>
+			</div>
+			<div className='news-details-news-content-container'>
+				<h1>{news.content}</h1>
+			</div>
+		</div>
+	);
+}
+
+/* <div className='slider-container'>
+				<div
+					style={{
+						backgroundImage: `url(${post.post_img_url})`,
+						paddingTop: '50px',
+						height: '575px',
+						backgroundPosition: 'center',
+						backgroundSize: 'cover',
+						backgroundRepeat: 'no-repeat',
+					}}></div>
+				<img className='donatee-img' src={post.donatee_img_url} alt='donatee' />
+
+				<p className='quote'>
+					<span>"{post.donatee_desc}"</span>
+					<br />
+					<span className='donatee-name'>{post.donatee_name}</span>
+				</p>
+			</div>
+			<div className='title-summary'>
+				<h1> {post.title}</h1>
+				<p> {post.summary}</p>
+			</div>
+			<div className='content-1'>
+				<img className='content-1-img' src={post.content_img_1} alt='body_img' />
+				<p className='content-1-text'>{post.content_1}</p>
+			</div>
+			<div className='content-2'>
+				<p className='content-2-text'>{post.content_2}</p>
+			</div>
+			<div className='content-3'>
+				<p className='content-3-text'>{post.content_3}</p>
+				<img className='content-2-img' src={post.content_img_2} alt='body_img' />
+			</div>
+			<div>
+				<p className='content-4-text'>{post.content_4}</p>
+			</div> */

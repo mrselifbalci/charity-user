@@ -10,7 +10,6 @@ import Terms from '../StaticPages/Terms';
 import Header from '../Header/Header';
 import NewsHomePage from '../News-HomePage/NewsHomePage';
 import SignUp from '../Auth/SignUp';
-import Slider from '../Slider/Slider';
 import axios from 'axios';
 import News from '../News/News';
 import NewsDetail from '../NewsDetail/NewsDetail';
@@ -30,11 +29,26 @@ export default function App() {
 	const [searchResults, setSearchResults] = useState([]);
 
 	useEffect(() => {
-		const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-		if(userInfo) {
-			userInfo.id && setIsLoggedIn(true)
+		const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+		if (userInfo) {
+			userInfo.id && setIsLoggedIn(true);
 		}
-	},[])
+	}, []);
+
+
+	const searchFunc = async (val) => {
+		let results = [];
+		for (let i = 0; i < val.length; i++) {
+			await axios
+				.get(`https://mern-brothers.herokuapp.com/posts/${val[i]}`)
+				.then((res) => results.push(res.data))
+				.catch((err) => console.log(err));
+		}
+
+		setSearchResults(results);
+		window.scroll(0, 0);
+	};
+
 
 	return (
 		<div>
@@ -47,23 +61,23 @@ export default function App() {
 				<Switch>
 					<Route
 						exact
-						path="/"
+						path='/'
 						render={() => (
 							<React.Fragment>
-								<Slider />
+								{/* <Slider /> */}
 								<NewsHomePage />
 							</React.Fragment>
 						)}
 					/>
 					<Route
 						exact
-						path="/login"
+						path='/login'
 						render={() => <Login setIsLoggedIn={setIsLoggedIn} />}
 					/>
 					<Route exact path="/static/:param" render={() => <Terms />} />
 					<Route
 						exact
-						path="/signup"
+						path='/signup'
 						render={() => (
 							<SignUp
 								setIsLoggedIn={setIsLoggedIn}
@@ -71,56 +85,52 @@ export default function App() {
 							/>
 						)}
 					/>
-					<Route exact path="/donate" component={Donate} />
-					<Route exact path="/campaigns&news" component={News} />
+					<Route exact path='/donate' component={Donate} />
+					<Route exact path='/campaigns&news' component={News} />
+					<Route exact path='/newsdetail/:id' render={() => <NewsDetail />} />
 					<Route
 						exact
-						path="/newsdetail/:id"
-						render={() => <NewsDetail />}
-					/>
-					<Route
-						exact
-						path="/getinvolved"
+						path='/getinvolved'
 						render={() => <GetInvolved isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
 						exact
-						path="/getinvolved/donategoods"
+						path='/getinvolved/donategoods'
 						render={() => <DonateGoods isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
 						exact
-						path="/getinvolved/donategoods-form"
+						path='/getinvolved/donategoods-form'
 						render={() => <DonateGoodsForm isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
 						exact
-						path="/getinvolved/donateyourtime"
+						path='/getinvolved/donateyourtime'
 						render={() => <DonateYourTime isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
 						exact
-						path="/getinvolved/donateyourtime-form"
+						path='/getinvolved/donateyourtime-form'
 						render={() => <DonateYourTimeForm />}
 					/>
 					<Route
 						exact
-						path="/getinvolved/donate-with-gift-card"
+						path='/getinvolved/donate-with-gift-card'
 						render={() => <GiftCard isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
 						exact
-						path="/getinvolved/beanambassador"
+						path='/getinvolved/beanambassador'
 						render={() => <Ambassador isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
 						exact
-						path="/getinvolved/beanambassador-form"
+						path='/getinvolved/beanambassador-form'
 						render={() => <AmbassadorForm />}
 					/>
 					<Route
 						exact
-						path="/search-results"
+						path='/search-results'
 						render={() => <SearchResults searchResults={searchResults} />}
 					/>
 

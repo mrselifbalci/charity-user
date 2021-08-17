@@ -17,6 +17,16 @@ const SignUp = ({ setIsLoggedIn, isLoggedIn }) => {
 
 	const history = useHistory();
 
+	useEffect(() => {
+		axios
+			.get('https://charity-backend-july.herokuapp.com/users')
+			.then((res) => {
+				// setUsers(res.data);
+				console.log(res.data)
+			})
+			.catch((err) => console.log(err));
+	}, []);
+
 	const responseGoogle = (response) => {
 		console.log(response);
 		if (!response.googleId)
