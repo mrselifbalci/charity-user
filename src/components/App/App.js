@@ -60,9 +60,7 @@ export default function App() {
 						path="/login"
 						render={() => <Login setIsLoggedIn={setIsLoggedIn} />}
 					/>
-					<Route exact path="/aboutus" component={About} />
-					<Route exact path="/policies" component={Policies} />
-					<Route exact path="/terms" component={Terms} />
+					<Route exact path="/static/:param" render={() => <Terms />} />
 					<Route
 						exact
 						path="/signup"
@@ -127,8 +125,6 @@ export default function App() {
 					/>
 
 					<Route exact path="/contact-us" component={ContactUs} />
-					<Route exact path="/aboutus" component={About} />
-					<Route exact path="/terms&conditions" component={Terms} />
 				</Switch>
 
 				<Footer />

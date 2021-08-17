@@ -16,7 +16,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, searchFunc }) => {
 
 	const onSubmitSearch = (e) => {
 		e.preventDefault();
-		axios.get(`http://localhost:5001/news/query/${search}`)
+		axios.get(`https://charity-backend-july.herokuapp.com/news/query/${search}`)
 			.then(data => {
 				searchFunc(data.data.data);
 			}).catch(err => console.log(err))
@@ -96,7 +96,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, searchFunc }) => {
 					</Link>
 
 					<Link
-						to="/aboutus"
+						to="/static/About us"
 						className="header-nav-links"
 						onClick={changeChecked}
 					>
