@@ -95,7 +95,7 @@ export default function App() {
 					/>
 					<Route
 						exact
-						path='/getinvolved/donategoods'
+						path='/getinvolved/donate-goods'
 						render={() => <DonateGoods isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
@@ -105,7 +105,7 @@ export default function App() {
 					/>
 					<Route
 						exact
-						path='/getinvolved/donateyourtime'
+						path='/getinvolved/donate-your-time'
 						render={() => <DonateYourTime isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
@@ -120,7 +120,7 @@ export default function App() {
 					/>
 					<Route
 						exact
-						path='/getinvolved/beanambassador'
+						path='/getinvolved/be-an-ambassador'
 						render={() => <Ambassador isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
