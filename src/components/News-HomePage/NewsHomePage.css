@@ -14,7 +14,7 @@
 	height: auto;
 	background-color: #347ca5;
 	right: 14px;
-	font-size: 35px;
+	font-size: 33px;
 	color: #fff;
 	width: 50%;
 	top: 70%;
@@ -32,7 +32,7 @@
 
 @media (max-width: 1312px) {
 	#quote-text {
-		font-size: 40px;
+		font-size: 30px;
 	}
 	#quote-person {
 		font-size: 22px;
@@ -41,16 +41,18 @@
 
 @media (max-width: 1188px) {
 	#quote-text {
-		font-size: 33px;
+		font-size: 26px;
 	}
 	#quote-person {
-		font-size: 18px;
+		font-size: 16px;
 	}
 }
 
 @media (max-width: 900px) {
 	#quote-text {
-		font-size: 22px;
+		font-size: 18px;
+    top: 80%;
+
 	}
 
 	#quote-person {
@@ -62,12 +64,13 @@
 		font-size: 12px;
 		padding: 8px 3%;
 		border-radius: 10px;
+    top: 75%;
 	}
 	#quote-person {
 		font-size: 8px;
 	}
   #slider-pic {
-    height: 350px;
+    height: 300px;
   }
   
 }
@@ -84,7 +87,8 @@
 @media (max-width: 334px) {
 	#quote-text {
 		font-size: 10px;
-		padding: 10px 5%;
+		padding: 10px 2%; 
+
 	}
 } 
 
