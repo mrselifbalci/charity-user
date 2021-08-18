@@ -69,7 +69,14 @@
 .news-details-news-content-container {
 	margin: 160px 0px 100px 0px;
 	text-align: center;
-	font-size: 60px;
+	font-size: 30px;
+	padding: 30px;
+}
+
+.CK-Editor {
+	width: 80%;
+	margin: 50px auto;
+	height: 200px;
 }
 
 @media (max-width: 1120px) {

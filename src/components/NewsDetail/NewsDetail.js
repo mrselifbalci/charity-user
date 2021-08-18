@@ -1,21 +1,43 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './NewsDetail.css';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import ckeditor from '@ckeditor/ckeditor5-react';
+// import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
+
+import './NewsDetail.css';
 
 export default function NewsDetail() {
+	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com';
+
+	// ClassicEditor.create(document.querySelector('#editor'), {
+	// 	plugins: [SimpleUploadAdapter],
+	// 	simpleUpload: {
+	// 		// The URL that the images are uploaded to.
+	// 		uploadUrl: `${API_BASE_URL}/medias`,
+
+	// 		// Enable the XMLHttpRequest.withCredentials property.
+	// 		withCredentials: true,
+
+	// 		// Headers sent along with the XMLHttpRequest to the upload server.
+	// 		headers: {
+	// 			'X-CSRF-TOKEN': 'CSRF-Token',
+	// 			Authorization: 'Bearer <JSON Web Token>',
+	// 		},
+	// 	},
+	// })
+	// 	.then((res) => console.log(res))
+	// 	.catch((err) => console.log(err));
+
 	useLayoutEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
 
 	const { id } = useParams();
+	const [addData, setAddData] = useState('');
 	const [news, setNews] = useState([]);
 	const [urlMainImage, setUrlMainImage] = useState('');
 	const [urlProfilePic, setUrlProfilePic] = useState('');
-
-	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com';
 
 	useEffect(() => {
 		axios
@@ -29,6 +51,18 @@ export default function NewsDetail() {
 				console.log(err);
 			});
 	}, [id]);
+
+	// const handleChange = (e, editor) => {
+	// 	const data = editor.getData();
+	// 	setAddData(data);
+	// };
+
+	// const handleSubmit = async () => {
+	// 	await axios.put(`${API_BASE_URL}/news/${id}`, {
+	// 		content: addData,
+	// 	});
+	// 	window.location.reload();
+	// };
 
 	return (
 		<div>
@@ -54,46 +88,20 @@ export default function NewsDetail() {
 				<h1 className='news-details-news-title'>{news.title}</h1>
 				<p className='news-details-news-summary'>{news.summary}</p>
 			</div>
-			<div className='news-details-news-content-container'>
-				<h1>{news.content}</h1>
+			{/* <div
+				className='news-details-news-content-container'
+				dangerouslySetInnerHTML={{ __html: news.content }}></div>
+			<div className='CK-Editor'>
+				<CKEditor
+					editor={ClassicEditor}
+					data={addData}
+					onChange={handleChange}
+					style={{ height: '300px' }}
+				/>
 			</div>
+			<button type='submit' onClick={handleSubmit}>
+				Add Content
+			</button> */}
 		</div>
 	);
 }
-
-/* <div className='slider-container'>
-				<div
-					style={{
-						backgroundImage: `url(${post.post_img_url})`,
-						paddingTop: '50px',
-						height: '575px',
-						backgroundPosition: 'center',
-						backgroundSize: 'cover',
-						backgroundRepeat: 'no-repeat',
-					}}></div>
-				<img className='donatee-img' src={post.donatee_img_url} alt='donatee' />
-
-				<p className='quote'>
-					<span>"{post.donatee_desc}"</span>
-					<br />
-					<span className='donatee-name'>{post.donatee_name}</span>
-				</p>
-			</div>
-			<div className='title-summary'>
-				<h1> {post.title}</h1>
-				<p> {post.summary}</p>
-			</div>
-			<div className='content-1'>
-				<img className='content-1-img' src={post.content_img_1} alt='body_img' />
-				<p className='content-1-text'>{post.content_1}</p>
-			</div>
-			<div className='content-2'>
-				<p className='content-2-text'>{post.content_2}</p>
-			</div>
-			<div className='content-3'>
-				<p className='content-3-text'>{post.content_3}</p>
-				<img className='content-2-img' src={post.content_img_2} alt='body_img' />
-			</div>
-			<div>
-				<p className='content-4-text'>{post.content_4}</p>
-			</div> */

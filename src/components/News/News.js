@@ -56,7 +56,8 @@ const News = () => {
 								{newsItem.title}
 							</h1>
 							<p className='latest-news-single-news-content-large-size'>
-								{newsItem.summary.slice(0, 550)}...{'  '}
+								{newsItem.summary && newsItem.summary.slice(0, 550)}...
+								{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;
@@ -64,7 +65,8 @@ const News = () => {
 								</small>
 							</p>
 							<p className='latest-news-single-news-content-medium-size'>
-								{newsItem.summary.slice(0, 350)}...{'  '}
+								{newsItem.summary && newsItem.summary.slice(0, 350)}...
+								{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;
@@ -72,7 +74,8 @@ const News = () => {
 								</small>
 							</p>
 							<p className='latest-news-single-news-content-small-size'>
-								{newsItem.summary.slice(0, 130)}...{'  '}
+								{newsItem.summary && newsItem.summary.slice(0, 130)}...
+								{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;

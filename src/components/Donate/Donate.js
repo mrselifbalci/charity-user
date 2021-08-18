@@ -132,7 +132,7 @@ const Donate = () => {
           </form>
           <br />
           <div className="other">
-            <Link to="/getInvolved">
+            <Link to="/getinvolved">
               <h2>Other ways to donate or get involved →</h2>
             </Link>
           </div>
