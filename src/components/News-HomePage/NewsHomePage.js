@@ -34,7 +34,23 @@ const NewsHomePage = () => {
 					<p className='quote-text'>{slider.quote}</p>
 
 
+			<div id="newsHomePage">
+				{posts.map((post,index)=> index %2 === 0 ? 	<div className="news">
+				
+					<img
+						className="news-img"
+						src={posts.length !== 0 ? post.mediaId.url : undefined}
+						alt={ post.mediaId.alt}
+					/>
+		
+			<div className="news-text">
+				<h2>{post.summary  ? post.title : undefined}</h2>
+
+
 					<p className='quote-person'>{slider.quoteAuthor}</p>
+
+
+				<p>{post.summary ? post.summary.split(' ').slice(0,80).join(' ') : undefined} <strong>....</strong></p>
 
 				{/* <p>{posts.length !== 0 ? (post.summary).split(' ').slice(0,60).join(' ') : undefined} <strong>....</strong></p> */}
 
