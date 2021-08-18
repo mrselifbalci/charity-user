@@ -33,7 +33,45 @@ const NewsHomePage = () => {
 				<div id='quote-text'>
 					<p className='quote-text'>{slider.quote}</p>
 
+
 					<p className='quote-person'>{slider.quoteAuthor}</p>
+
+				{/* <p>{posts.length !== 0 ? (post.summary).split(' ').slice(0,60).join(' ') : undefined} <strong>....</strong></p> */}
+
+
+				<Link
+					to={`/newsdetail/${
+						posts.length !== 0 ? post._id:undefined
+					}`}
+				>
+					<span className="news-btn">Read More</span>
+				</Link>
+			</div>
+			<div
+			style={{
+				height: 30,
+				backgroundColor: '#f2f2f2',
+			}}
+		></div> 
+		</div> : <div>
+			<div className="news">
+				<div className="news-text">
+					<h2>
+						{posts.length !== 0 ? post.title:undefined} 
+					</h2>
+
+					<p>
+						{posts.length !== 0 ? (post.summary).split(' ').slice(0,60).join(' ') : undefined} <strong>....</strong>
+					</p>
+
+					<Link
+						to={`/newsdetail/${
+							posts.length !== 0 ? post._id:undefined
+						}`}
+					>
+						<span className="news-btn">Read More</span>
+					</Link>
+
 				</div>
 			</div>
 
