@@ -1,9 +1,9 @@
 
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import { Link } from "react-router-dom";
 import imageHeader from '../DonateGoods/Rectangle 26.png';
 
-import React, {useEffect,useState} from 'react';
+
 // import imageHeader from '../DonateGoods/Rectangle 26.png';
 
 import "./Ambassador.css";
