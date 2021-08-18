@@ -57,7 +57,8 @@ const NewsHomePage = () => {
 					/>
 		
 			<div className="news-text">
-				<h2>{posts.length !== 0 ? post.title : undefined}</h2>
+				<h2>{post.summary  ? post.title : undefined}</h2>
+
 
 
 				<p>{post.summary ? (post.summary).split(' ').slice(0,60).join(' ') : undefined} <strong>....</strong></p>
