@@ -111,8 +111,8 @@ export default function App() {
 					<Route
 						exact
 						path='/getinvolved/donateyourtime-form'
-						render={() => <DonateYourTimeForm />}
-					/>
+						render={() => <DonateYourTimeForm isLoggedIn={isLoggedIn}/>}
+					/> 
 					<Route
 						exact
 						path='/getinvolved/donate-with-gift-card'
@@ -126,7 +126,7 @@ export default function App() {
 					<Route
 						exact
 						path='/getinvolved/beanambassador-form'
-						render={() => <AmbassadorForm />}
+						render={() => <AmbassadorForm isLoggedIn={isLoggedIn} />}
 					/>
 					<Route
 						exact

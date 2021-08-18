@@ -1,11 +1,15 @@
 import React, {useEffect} from 'react';
+import { Link } from "react-router-dom";
 import imageHeader from '../DonateGoods/Rectangle 26.png';
 import "./Ambassador.css";
 import "./AmbassadorForm.css"
 import { useHistory } from 'react-router-dom';
 
 const Ambassador = ({isLoggedIn}) => {
+
   const history = useHistory()
+
+
   function handleClick () {
     if(isLoggedIn) {
       history.push("/getinvolved/beanambassador-form") }
@@ -43,6 +47,7 @@ history.push("/login")
       <p>Our committee is currently looking for ambassadors to join our cause! Please consider applying. We look forward to having you on board!</p>
        </p>
 
+       
 					<button
 						onClick={handleClick}
 						className="apply-btn-Amb"
