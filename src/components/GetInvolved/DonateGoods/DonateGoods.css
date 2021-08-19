@@ -68,21 +68,6 @@
   float: left;
 }
 
-.content1-p {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: justify;
-  font-family: Prociono;
-  font-style: normal;
-  font-weight: normal;
-  font-size: x-large;
-  line-height: 2;
-  padding-left: 5%;
-  padding-right: 5%;
-  height: 100%;
-  float: right;
-}
 
 .content2 {
   display: flex;
@@ -95,11 +80,7 @@
   margin-top: 5%;
 }
 
-.image-2 {
-  height: fit-content;
-  border-radius: 5px;
-  width: 60%;
-}
+
 
 .content2-p {
   display: block;
@@ -172,10 +153,7 @@
     font-size: 18px;
   }
 
-  .image-1,
-  .image-2 {
-    width: 40%;
-  }
+
   .donate-goods-modal {
     font-size: medium !important;
     line-height: 1.1 !important;
@@ -212,10 +190,6 @@
     font-size: small;
   }
 
-  .image-1,
-  .image-2 {
-    width: 35%;
-  }
 
   .donate-goods-modal {
     font-size: small !important;
@@ -276,10 +250,7 @@
     flex-wrap: wrap;
   }
 
-  .image-1,
-  .image-2 {
-    width: 80%;
-  }
+
 
   .content2 {
     display: flex;
