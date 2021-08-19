@@ -6,6 +6,7 @@ import axios from 'axios';
 
 
 
+
 const Terms = () => {
 	const [state, setState] = useState('')
 	const {param} = useParams()

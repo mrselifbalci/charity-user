@@ -115,7 +115,7 @@ export default function App() {
 					/> 
 					<Route
 						exact
-						path='/getinvolved/donate-with-gift-card'
+						path='/getinvolved/donate-with-a-gift-card'
 						render={() => <GiftCard isLoggedIn={isLoggedIn} />}
 					/>
 					<Route

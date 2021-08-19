@@ -20,7 +20,6 @@ const DonateGoodsForm = () => {
 		JSON.parse(sessionStorage.getItem('userInfo')).id,
 	);
 
-	setUserId()
 	useLayoutEffect(() => {
 		window.scroll(0, 0);
 	}, []);
