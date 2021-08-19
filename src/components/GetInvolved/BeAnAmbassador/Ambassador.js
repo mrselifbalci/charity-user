@@ -25,28 +25,24 @@ history.push("/login")
     }
   
 
-    const [title, setTitle] = useState("");
     const [image, setImage] = useState();
-    const [ambassador , setAmbassador ] = useState([]);
+    const [ambassador , setAmbassador ] = useState("");
   
     useEffect(() => {
       axios
-        .get('https://charity-backend-july.herokuapp.com/getinvolved')
-        .then((res) => setAmbassador(res.data.response[0]))
+        .get('https://charity-backend-july.herokuapp.com/getinvolved/title/Be an Ambassador')
+        .then((res) => setAmbassador(res.data.data[0]))
         .catch((err) => console.log(err));
   
       axios
       .get('https://charity-backend-july.herokuapp.com/slider/type/ambassador')
       .then((res) => {
-        setTitle(res.data.data[0]);
-        setImage(res.data.data[0].mediaId.url);
-  
-        console.log(ambassador);
+      setImage(res.data.data[0].mediaId.url);
+ 
       })
       .catch((err) => console.log(err));	
     }, [image]);
    
-  console.log(title.title);
   useEffect(() => {
 		window.scroll(0, 0);
 	}, []);
@@ -55,7 +51,7 @@ history.push("/login")
       <div className="ambassadorForm-container">
 				<img src={image} alt="Avatar" className="ambassadorForm-image" />
 				<div className="ambassadorForm-overlay">
-					<h1 className="ambassadorForm-text" id="h1-content">{title.title}</h1>
+					<h1 className="ambassadorForm-text" id="h1-content">{ambassador.title}</h1>
 				</div>
 			</div>
       <div className="contentAmb">
