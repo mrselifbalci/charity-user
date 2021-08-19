@@ -44,11 +44,8 @@ const AmbassadorForm = () => {
 	const [particular, setParticular] = useState('');
 	const [comment, setComment] = useState('');
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	const [userId, setUserId] = useState(
-		JSON.parse(sessionStorage.getItem('userInfo')).id,
-	);
+	const [userId, setUserId] = useState(JSON.parse(sessionStorage.getItem('userInfo')).id);
 
-	setUserId()
 
 	const makeAnotherDonation = () => {
 		window.scroll(0, 0);
@@ -115,7 +112,7 @@ const AmbassadorForm = () => {
 						this.setSelectionRange(
 							this.oldSelectionStart,
 							this.oldSelectionEnd,
-						);
+						)
 					} else {
 						this.value = '';
 					}
@@ -132,8 +129,7 @@ const AmbassadorForm = () => {
 
 	return (
 		<div>
-			elif
-			{/* <div className="ambassadorForm-container">
+			<div className="ambassadorForm-container">
 				<img
 					src={imageHeader}
 					alt="Avatar"
@@ -283,7 +279,7 @@ const AmbassadorForm = () => {
 				<button className="donate-goods-form-btn-popup" onClick={() => history.push('/')}>
 					Back to home page
 				</button>
-			</Modal> */}
+			</Modal>
 		</div>
 	);
 };
