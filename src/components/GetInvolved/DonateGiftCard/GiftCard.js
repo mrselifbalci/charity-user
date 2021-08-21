@@ -5,33 +5,6 @@ import Modal from 'react-modal';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 
-// const customStyles = {
-// 	content: {
-// 		position: 'absolute',
-// 		top: '38%',
-// 		left: '50%',
-// 		right: '50%',
-// 		bottom: '60%',
-// 		marginRight: '-50%',
-// 		marginTop: '120px',
-// 		transform: 'translate(-50%, -50%)',
-// 		height: 'fit-content',
-// 		backgroundColor: '#76A9C7',
-// 		padding: '10px',
-// 		width: '40%',
-// 		fontFamily: 'Roboto',
-// 		fontStyle: 'normal',
-// 		fontWeight: 'normal',
-// 		fontSize: 'large',
-// 		lineHeight: '28px',
-// 		color: 'white',
-// 		marginBottom: '450px',
-// 		display: 'flex',
-// 		flexDirection: 'column',
-// 		justifyContent: 'center',
-// 		textAlign: 'center',
-// 	},
-// };
 
 const GiftCard = () => {
 	const [checkbox, setCheckbox] = useState(false);
@@ -62,15 +35,18 @@ const GiftCard = () => {
 	const submit = async (e) => {
 		e.preventDefault();
 		await axios
-			.post('https://mern-brothers.herokuapp.com/gift-card-donation', {
-				type_of_card: type,
+			.post('https://charity-backend-july.herokuapp.com/donations', {
+				firstname,
+				lastname,
+				type:'Gift Card',
+				type_of_card:type,
 				card_number: number,
 				security_code: code,
 				amount: balance,
 				expriration_date: expiration,
 				post_code: postcode,
-				add_info: info,
-				user_id: JSON.parse(sessionStorage.getItem('userInfo')).id,
+				comments: info,
+				userId: JSON.parse(sessionStorage.getItem('userInfo')) ? JSON.parse(sessionStorage.getItem('userInfo')).id : null,
 			})
 			.then((res) => console.log(res.data))
 			.catch((err) => console.log(err));
@@ -86,7 +62,6 @@ const GiftCard = () => {
 		setLastname('')
 		setIsOpen(true);
 	};
-
 	return (
 		<div>
 			<div className="donate-goods-container">
