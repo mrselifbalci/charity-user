@@ -12,7 +12,7 @@ const Terms = () => {
 	const {param} = useParams()
 	
 	useEffect(() => {
-		axios.get(`http://localhost:5001/staticpage/name/${param}`)
+		axios.get(`https://charity-backend-july.herokuapp.com/staticpage/name/${param}`)
 			.then(data => {
 				setState(data.data.data)
 				document.querySelector('.terms-maincontent').innerHTML = data.data.data.content
