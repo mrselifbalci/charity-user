@@ -10,7 +10,6 @@ import Terms from '../StaticPages/Terms';
 import Header from '../Header/Header';
 import NewsHomePage from '../News-HomePage/NewsHomePage';
 import SignUp from '../Auth/SignUp';
-import axios from 'axios';
 import News from '../News/News';
 import NewsDetail from '../NewsDetail/NewsDetail';
 import GetInvolved from '../GetInvolved/GetInvolved';

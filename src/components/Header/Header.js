@@ -8,7 +8,6 @@ import axios from 'axios';
 
 const Header = ({ isLoggedIn, setIsLoggedIn, searchFunc }) => {
 	const [search, setSearch] = useState('');
-	const [posts, setPosts] = useState([]);
 	const [userName, setUserName] = useState('');
 	const history = useHistory();
 	const [checked, setChecked] = useState(false);
