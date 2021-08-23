@@ -31,16 +31,16 @@
 	margin: 50px;
 }
 .donate_time_btn .donate_time_your_btn {
-	width: 196px;
+	width: 176px;
 	height: 60px;
 	text-align: center;
 	background: #f49131;
-	border-radius: 10px;
+	border-radius: 5px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-top: -30px;
-	color: #e5e5e5;
+	color: #fff;
 	font-family: Roboto;
 	font-size: 28px;
 	font-weight: bolder;
