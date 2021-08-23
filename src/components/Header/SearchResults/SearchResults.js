@@ -1,57 +1,52 @@
-import './SearchResults.css'
+import './SearchResults.css';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
- 
-const SearchResults = ({ searchResults}) => {
-	// const {id} =useParams();
-	const [posts, setPosts] = useState([])
-	const [viewmore, setViewmore] = useState(0);
+const SearchResults = ({ searchResults }) => {
+	const [news, setNews] = useState([]);
 	useEffect(() => {
-        setPosts(searchResults)
+		setNews(searchResults);
 	}, [searchResults]);
- 
-	// const viewMore = () => {
-	// 	if (posts.length - 2 <= viewmore) {
-	// 		document.querySelector('.allPosts').textContent =
-	// 			'No more stories to view...';
-	// 	} else {
-	// 		setViewmore(viewmore + 2);
-	// 	}
-	// };
 
 	return (
 		<div className='search-results-main'>
-			
-			<div className="search-results-text">
+			<div className='search-results-text'>
 				<p>Search Results</p>
 			</div>
-			<div className="search-results-content-area">
-			<table id="news-area">
-				<br />
-				{posts.map((newsItem) => (
-					<div className='latest-news-single-news-container'>
-						<div className='latest-news-single-news-img-container'>
+			<div className='search-results-container'>
+				{news.map((newsItem) => (
+					<div className='search-results-single-news-container'>
+						<div className='search-results-single-news-img-container'>
 							<img
 								src={newsItem.mediaId.url}
-								alt='latest-news-pic'
-								className='latest-news-single-news-img'
+								alt='search-results-pic'
+								className='search-results-single-news-img'
 							/>
 						</div>
 						<div>
-							<h1 className='latest-news-single-news-title'>
+							<h1 className='search-results-single-news-title'>
 								{newsItem.title}
 							</h1>
-							<p className='latest-news-single-news-content'>
-								{newsItem.summary.slice(0, 250)}...{'  '}
+							<p className='search-results-single-news-content-large-size'>
+								{newsItem.summary && newsItem.summary.slice(0, 550)}...
+								{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;
 									</a>
 								</small>
 							</p>
-							<p className='latest-news-single-news-content-small-size'>
-								{newsItem.summary.slice(0, 100)}...{'  '}
+							<p className='search-results-single-news-content-medium-size'>
+								{newsItem.summary && newsItem.summary.slice(0, 350)}...
+								{'  '}
+								<small>
+									<a href={`/newsdetail/${newsItem._id}`}>
+										continue reading &raquo;
+									</a>
+								</small>
+							</p>
+							<p className='search-results-single-news-content-small-size'>
+								{newsItem.summary && newsItem.summary.slice(0, 130)}...
+								{'  '}
 								<small>
 									<a href={`/newsdetail/${newsItem._id}`}>
 										continue reading &raquo;
@@ -60,13 +55,7 @@ const SearchResults = ({ searchResults}) => {
 							</p>
 						</div>
 					</div>
-				))}<br/>
-				{/* <tr className="allPosts"></tr>
-				<tr className="tr-btn-viewmore">
-				
-					<button id="news-btn-viewmore" onClick={viewMore}>View More</button>
-				</tr> */}
-			</table>
+				))}
 			</div>
 		</div>
 	);

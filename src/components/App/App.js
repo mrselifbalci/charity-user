@@ -35,21 +35,6 @@ export default function App() {
 		}
 	}, []);
 
-
-	const searchFunc = async (val) => {
-		let results = [];
-		for (let i = 0; i < val.length; i++) {
-			await axios
-				.get(`https://mern-brothers.herokuapp.com/posts/${val[i]}`)
-				.then((res) => results.push(res.data))
-				.catch((err) => console.log(err));
-		}
-
-		setSearchResults(results);
-		window.scroll(0, 0);
-	};
-
-
 	return (
 		<div>
 			<Router>
@@ -74,7 +59,7 @@ export default function App() {
 						path='/login'
 						render={() => <Login setIsLoggedIn={setIsLoggedIn} />}
 					/>
-					<Route exact path="/static/:param" render={() => <Terms />} />
+					<Route exact path='/static/:param' render={() => <Terms />} />
 					<Route
 						exact
 						path='/signup'
@@ -111,8 +96,8 @@ export default function App() {
 					<Route
 						exact
 						path='/getinvolved/donateyourtime-form'
-						render={() => <DonateYourTimeForm isLoggedIn={isLoggedIn}/>}
-					/> 
+						render={() => <DonateYourTimeForm isLoggedIn={isLoggedIn} />}
+					/>
 					<Route
 						exact
 						path='/getinvolved/donate-with-a-gift-card'
@@ -134,7 +119,7 @@ export default function App() {
 						render={() => <SearchResults searchResults={searchResults} />}
 					/>
 
-					<Route exact path="/contact-us" component={ContactUs} />
+					<Route exact path='/contact-us' component={ContactUs} />
 				</Switch>
 
 				<Footer />
