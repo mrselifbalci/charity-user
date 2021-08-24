@@ -38,7 +38,7 @@ const GiftCard = () => {
 			.post('https://charity-backend-july.herokuapp.com/donations', {
 				firstname,
 				lastname,
-				type:'Gift Card',
+				type:'gift-card',
 				type_of_card:type,
 				card_number: number,
 				security_code: code,
@@ -205,7 +205,7 @@ const GiftCard = () => {
 							may help us process your gift card. (optional)
 						</label>
 						<textarea
-							required
+				
 							value={info}
 							onChange={(e) => setInfo(e.target.value)}
 							type="text"

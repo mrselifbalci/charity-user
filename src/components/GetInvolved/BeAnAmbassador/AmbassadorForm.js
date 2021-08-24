@@ -72,11 +72,11 @@ const AmbassadorForm = () => {
 				lastname: lastname,
 				phone: number,
 				email: email,
-				based_in: city,
+				city: city,
 				reason_to_join: reason,
 				interest_area: particular,
 				comments: comment,
-				user_id: userId,
+				userId: userId,
 				type:"ambassador-form"
 			})
 			.then((res) => console.log(res))
