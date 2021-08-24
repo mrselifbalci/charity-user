@@ -9,16 +9,18 @@ const News = () => {
 	const [url, setUrl] = useState();
 	const [navPages, setNavPages] = useState();
 
+	const API_BASE_URL = 'https://charity-backend-july.herokuapp.com';
+
 	useEffect(() => {
 		axios
-			.get('https://charity-backend-july.herokuapp.com/slider/type/latest-news')
+			.get(`${API_BASE_URL}/slider/type/latest-news`)
 			.then((res) => {
 				setSlider(res.data.data[0]);
 				setUrl(res.data.data[0].mediaId.url);
 			})
 			.catch((err) => console.log(err));
 		axios
-			.get(`https://charity-backend-july.herokuapp.com/news?page=${page}&limit=2`)
+			.get(`${API_BASE_URL}/news?page=${page}&limit=2`)
 			.then((res) => {
 				setNews(res.data.data);
 				setNavPages(Math.ceil(res.data.total / 2));

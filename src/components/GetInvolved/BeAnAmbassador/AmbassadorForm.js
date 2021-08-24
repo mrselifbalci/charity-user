@@ -67,7 +67,7 @@ const AmbassadorForm = () => {
 	const submit = (e) => {
 		e.preventDefault();
 		axios
-			.post('http://mern-brothers.herokuapp.com/ambassadors', {
+			.post('https://charity-backend-july.herokuapp.com/donations', {
 				firstname: firstname,
 				lastname: lastname,
 				phone: number,
@@ -77,6 +77,7 @@ const AmbassadorForm = () => {
 				interest_area: particular,
 				comments: comment,
 				user_id: userId,
+				type:"ambassador-form"
 			})
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));

@@ -32,7 +32,7 @@ const DonateGoodsForm = () => {
 	const submitForm = (e) => {
 		e.preventDefault();
 		axios
-			.post('https://mern-brothers.herokuapp.com/goods-donation', {
+			.post('https://charity-backend-july.herokuapp.com/donations', {
 				firstname: firstName,
 				lastname: lastName,
 				email: email,
@@ -43,6 +43,7 @@ const DonateGoodsForm = () => {
 				post_code: postCode,
 				instructions_for_the_driver: instructions,
 				user_id: userId,
+				type:"donate-good-form"
 			})
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
