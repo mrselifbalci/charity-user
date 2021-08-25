@@ -205,7 +205,7 @@ const GiftCard = () => {
 							may help us process your gift card. (optional)
 						</label>
 						<textarea
-							required
+				
 							value={info}
 							onChange={(e) => setInfo(e.target.value)}
 							type="text"

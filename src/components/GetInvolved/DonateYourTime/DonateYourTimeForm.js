@@ -34,7 +34,7 @@ const DonateYourTimeForm = () => {
 				city,
 				interested_in,
 				comments,
-				type: 'Time',
+				type: 'time',
 				userId,
 			})
 			.then((res) => console.log(res))
