@@ -123,6 +123,17 @@
   background-repeat: no-repeat;
   border-radius: 10px;
 }
+
+.donate-text {
+  position: inherit;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-top: 7%;
+  font-size: 3rem;
+}
+
 /********************************************************/
 
 @media only screen and (max-width: 1366px) {

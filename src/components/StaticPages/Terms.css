@@ -1,3 +1,37 @@
+.staticpages-container {
+  position: relative;
+}
+
+.staticpages-image {
+  display: block;
+  width: 100%;
+  height: 317px;
+}
+.staticpages-overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(52, 124, 165, 0.84);
+  width: 100%;
+  transition: 0.5s ease;
+  color: white;
+  height: 100%;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.staticpages-text {
+  position: inherit;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-top: 7%;
+  font-size: 4rem;
+}
+
 .terms-header {
   height: 153px;
   background-color: rgb(0, 191, 255);

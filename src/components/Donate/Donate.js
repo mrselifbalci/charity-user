@@ -3,6 +3,7 @@ import "./Donate.css";
 import { Link } from "react-router-dom";
 import Paypal from "./Paypal";
 import axios from "axios";
+import imageHeader from '../GetInvolved/DonateGoods/Rectangle 26.png';
 
 const Donate = () => {
   const [checkout, setCheckOut] = useState(false);
@@ -53,14 +54,12 @@ const Donate = () => {
   return (
     <div className="main">
       <div className="flex-container">
-        <div className="div-picture" style={{backgroundImage:`url(${url})`}}>
-          {/* <img src={url} alt=""/> */}
-        </div>
-        <div className="text">
-          <p>
-           {donate.quote}
-          </p>
-        </div>
+        <div className="staticpages-container">
+				<img src={imageHeader} alt="Avatar" className="staticpages-image" />
+				<div className="staticpages-overlay">
+					<p className="donate-text" id="termstitle">{donate.quote}</p>
+				</div>
+			</div>
         <div className={classone}>
           <div className="donate-header">
             <h1>{donate.title}</h1>

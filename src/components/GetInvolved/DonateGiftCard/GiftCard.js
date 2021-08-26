@@ -43,8 +43,8 @@ const GiftCard = () => {
 				card_number: number,
 				security_code: code,
 				amount: balance,
-				expriration_date: expiration,
-				post_code: postcode,
+				expiration_date: expiration,
+				postcode: postcode,
 				comments: info,
 				userId: JSON.parse(sessionStorage.getItem('userInfo')) ? JSON.parse(sessionStorage.getItem('userInfo')).id : null,
 			})
@@ -87,7 +87,7 @@ const GiftCard = () => {
 							onChange={(e) => setFirstname(e.target.value)}
 							type="text"
 							id="giftcard-type"
-							name="giftcard-type"w
+							name="giftcard-type"
 							placeholder="Enter the type of gift card"
 						/>
 					</div>

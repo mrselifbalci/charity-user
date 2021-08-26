@@ -3,6 +3,7 @@ import './Terms.css';
 import imageHeader from '../GetInvolved/DonateGoods/Rectangle 26.png';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
+import ReactHtmlParser from 'react-html-parser';
 
 
 
@@ -15,7 +16,6 @@ const Terms = () => {
 		axios.get(`https://charity-backend-july.herokuapp.com/staticpage/name/${param}`)
 			.then(data => {
 				setState(data.data.data)
-				document.querySelector('.terms-maincontent').innerHTML = data.data.data.content
 			})
 			.catch(err => console.log(err))
 			console.log(param)
@@ -26,14 +26,14 @@ const Terms = () => {
 	return (
 		
 		<div className="terms-content-container">
-				<div className="ambassadorForm-container">
-				<img src={imageHeader} alt="Avatar" className="ambassadorForm-image" />
-				<div className="ambassadorForm-overlay">
-					<h1 className="ambassadorForm-text" id="termstitle">{state.name}</h1>
+				<div className="staticpages-container">
+				<img src={imageHeader} alt="Avatar" className="staticpages-image" />
+				<div className="staticpages-overlay">
+					<p className="staticpages-text" id="termstitle">{state.name}</p>
 				</div>
 			</div>
 			<div className="terms-maincontent">
-			
+			{ReactHtmlParser(state.content)}
 			</div>
 			
 		</div>
