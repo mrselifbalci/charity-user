@@ -62,19 +62,15 @@ const DonateYourTimeForm = () => {
 						<div className='donate_your_time_form_phone_city_container'>
 							<div className='donate_your_time_form_phone_container'>
 								<label htmlFor='number'>
-									Contact Number
+									Phone
 									<span
 										className='donate_time_form_contact_num'
-										style={{ fontSize: '14px' }}>
-										<i>(Format XXX-XXXX-XXXX)</i>
-									</span>
+										style={{ fontSize: '14px' }}></span>
 								</label>
 								<br />
 								<input
 									value={phone}
-									pattern='[0-9]{3}-[0-9]{4}-[0-9]{4}'
 									onChange={(e) => setPhone(e.target.value)}
-									type='phone'
 									id='number'
 									name='number'
 									placeholder='Enter your contact number'
