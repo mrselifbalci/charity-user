@@ -1,70 +1,68 @@
 .contentAmb {
-  display: grid;
-  align-content: center;
-  height: 100%;
-  width: 100%;
-  background: #e5e5e5;
-  margin-left: auto;
-  margin-right: auto;
+	display: grid;
+	align-content: center;
+	height: 100%;
+	width: 100%;
+	background: #e5e5e5;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-
-
 .apply-btn-Amb {
-  width: fit-content;
-  margin-left: 44%;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  border-radius: 5px;
-  border: none;
-  background: #f49131;
-  color: #fff;
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
-  font-size: 24px;
+	width: fit-content;
+	margin-left: 44%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	border-radius: 5px;
+	border: none;
+	background: #f49131;
+	color: #fff;
+	padding: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-size: 24px;
 }
 
 @media only screen and (max-width: 885px) {
-  .apply-btn-Amb {
-    width: fit-content;
-  }
+	.apply-btn-Amb {
+		width: fit-content;
+	}
 }
 
 @media only screen and (max-width: 415px) {
-  #h1-content {
-    margin-left: 15%;
-  }
-  .apply-btn-Amb {
-    margin-left: 40%;
-    width: fit-content;
-    font-size: 20px;
-  }
+	#h1-content {
+		margin-left: 15%;
+	}
+	.apply-btn-Amb {
+		margin-left: 40%;
+		width: fit-content;
+		font-size: 20px;
+	}
 
-  .contentAmb1-p {
-    font-size: 18px;
-    line-height: 30px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .contentAmb1-p li {
-    color: black;
-    font-size: 16px;
-  }
-  .ambassadorForm-text {
-    margin-top: -10px;
-  }
+	.contentAmb1-p {
+		font-size: 18px;
+		line-height: 30px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.contentAmb1-p li {
+		color: black;
+		font-size: 16px;
+	}
+	.ambassadorForm-text {
+		margin-top: -10px;
+	}
 }
 @media only screen and (max-width: 376px) {
-  #h1-content {
-    margin-left: 11%;
-  }
+	.ambassadorForm-text {
+		margin-left: 11%;
+	}
 }
 @media only screen and (max-width: 361px) {
-  #h1-content {
-    margin-left: 10%;
-  }
-  .ambassadorForm-text {
-    margin-top: -15px;
-  }
+	.ambassadorForm-text {
+		margin-left: 10%;
+	}
+	.ambassadorForm-text {
+		margin-top: -15px;
+	}
 }

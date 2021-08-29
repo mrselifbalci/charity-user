@@ -5,7 +5,6 @@ import Modal from 'react-modal';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 
-
 const customStyles = {
 	content: {
 		position: 'absolute',
@@ -35,17 +34,15 @@ const customStyles = {
 };
 
 const AmbassadorForm = () => {
-	const [firstname, setFirstName] = useState('');
-	const [lastname, setLastName] = useState('');
-	const [number, setNumber] = useState('');
-	const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
 	const [city, setCity] = useState('');
 	const [reason, setReason] = useState('');
-	const [particular, setParticular] = useState('');
+	const [interested_in, setInterestedIn] = useState('');
 	const [comment, setComment] = useState('');
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	const [userId, setUserId] = useState(JSON.parse(sessionStorage.getItem('userInfo')).id);
-
+	const [userId, setUserId] = useState(
+		JSON.parse(sessionStorage.getItem('userInfo')).id
+	);
 
 	const makeAnotherDonation = () => {
 		window.scroll(0, 0);
@@ -56,9 +53,7 @@ const AmbassadorForm = () => {
 	function closeModal() {
 		setIsOpen(false);
 	}
-	function afterOpenModal() {
-		// references are now sync'd and can be accessed.
-	}
+	function afterOpenModal() {}
 
 	useEffect(() => {
 		window.scroll(0, 0);
@@ -68,26 +63,21 @@ const AmbassadorForm = () => {
 		e.preventDefault();
 		axios
 			.post('https://charity-backend-july.herokuapp.com/donations', {
-				firstname: firstname,
-				lastname: lastname,
-				phone: number,
-				email: email,
-				city: city,
+				phone,
+				city,
 				reason_to_join: reason,
-				interest_area: particular,
+				interested_in,
 				comments: comment,
-				userId: userId,
-				type:"ambassador-form"
+				userId,
+				type: 'ambassador',
 			})
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
-		setFirstName('');
-		setLastName('');
-		setNumber('');
-		setEmail('');
+
+		setPhone('');
 		setCity('');
 		setReason('');
-		setParticular('');
+		setInterestedIn('');
 		setComment('');
 		setIsOpen(true);
 	};
@@ -112,8 +102,8 @@ const AmbassadorForm = () => {
 						this.value = this.oldValue;
 						this.setSelectionRange(
 							this.oldSelectionStart,
-							this.oldSelectionEnd,
-						)
+							this.oldSelectionEnd
+						);
 					} else {
 						this.value = '';
 					}
@@ -121,100 +111,52 @@ const AmbassadorForm = () => {
 			}
 		});
 	}
-	setInputFilter(
-		document.getElementById('ambassador-contact'),
-		function (value) {
-			return /^\d*\.?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-		},
-	);
+	setInputFilter(document.getElementById('ambassador-contact'), function (value) {
+		return /^\d*\.?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+	});
 
 	return (
 		<div>
-			<div className="ambassadorForm-container">
-				<img
-					src={imageHeader}
-					alt="Avatar"
-					className="ambassadorForm-image"
-				/>
-				<div className="ambassadorForm-overlay">
-					<h1 className="ambassadorForm-text" id="h1-content">
+			<div className='ambassadorForm-container'>
+				<img src={imageHeader} alt='Avatar' className='ambassadorForm-image' />
+				<div className='ambassadorForm-overlay'>
+					<h1 className='ambassadorForm-text' id='h1-content'>
 						Be an Ambassador
 					</h1>
 				</div>
 			</div>
-			<div className="ambassador-form-content">
-				<form className="ambassador-form" onSubmit={submit}>
-					<div className="ambassador-row1">
+			<div className='ambassador-form-content'>
+				<form className='ambassador-form' onSubmit={submit}>
+					<div className='ambassador-row1'>
 						<div>
-							<label htmlFor="ambassador-name">First Name</label>
+							<label htmlFor='ambassador-contact'>Contact Number</label>
 							<input
 								required
-								value={firstname}
-								onChange={(e) => setFirstName(e.target.value)}
-								type="text"
-								id="ambassador-name"
-								name="ambassador-name"
-								placeholder="Enter your name and surname"
+								value={phone}
+								onChange={(e) => setPhone(e.target.value)}
+								type='tel'
+								id='ambassador-contact'
+								name='ambassador-contact'
+								placeholder='Enter your contact number'
 							/>
 						</div>
 						<div>
-							<label htmlFor="ambassador-name">Last Name</label>
-							<input
-								required
-								value={lastname}
-								onChange={(e) => setLastName(e.target.value)}
-								type="text"
-								id="ambassador-name"
-								name="ambassador-name"
-								placeholder="Enter your name and surname"
-							/>
-					</div>
-					
-						<div>
-							<label htmlFor="ambassador-contact">Contact Number</label>
-							<input
-								required
-								value={number}
-								onChange={(e) => setNumber(e.target.value)}
-								type="tel"
-								id="ambassador-contact"
-								name="ambassador-contact"
-								placeholder="Enter your contact number"
-							/>
-						</div>
-					</div>
-					<div className="ambassador-row2">
-				
-						<div className="ambas-email">
-							<label htmlFor="ambassador-email">Email</label>
-							<input
-								required
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								type="email"
-								id="ambassador-email"
-								name="ambassador-email"
-								placeholder="Enter your email address"
-							/>
-						</div>
-						<div>
-							<label htmlFor="ambassador-based">
-								Where are you based?
-							</label>
+							<label htmlFor='ambassador-based'>Where are you based?</label>
 							<input
 								required
 								value={city}
-								type="text"
-								id="ambassador-based"
-								name="ambassador-based"
-								placeholder="Enter the city name"
+								type='text'
+								id='ambassador-based'
+								name='ambassador-based'
+								placeholder='Enter the city name'
 								onChange={(e) => setCity(e.target.value)}
 							/>
 						</div>
 					</div>
-					<div className="ambassador-row3">
+
+					<div className='ambassador-row2'>
 						<div>
-							<label htmlFor="ambassador-reason">
+							<label htmlFor='ambassador-reason'>
 								Why do you want to join us?
 							</label>{' '}
 							<br />
@@ -222,42 +164,42 @@ const AmbassadorForm = () => {
 								required
 								value={reason}
 								onChange={(e) => setReason(e.target.value)}
-								type="text"
-								id="ambassador-reason"
-								name="ambassador-reason"
+								type='text'
+								id='ambassador-reason'
+								name='ambassador-reason'
 							/>
 						</div>
 						<div>
-							<label htmlFor="ambassador-particular">
-								What particular areas are you willing to contribute to
-								or interest you the most?
+							<label htmlFor='ambassador-particular'>
+								What particular areas are you willing to contribute to or
+								interest you the most?
 							</label>
 							<textarea
 								required
-								value={particular}
-								onChange={(e) => setParticular(e.target.value)}
-								type="text"
-								id="ambassador-particular"
-								name="ambassador-particular"
+								value={interested_in}
+								onChange={(e) => setInterestedIn(e.target.value)}
+								type='text'
+								id='ambassador-particular'
+								name='ambassador-particular'
 							/>
 						</div>
 					</div>
-					<div className="ambassador-row5">
-						<label htmlFor="ambassador-comment">
+					<div className='ambassador-row3'>
+						<label htmlFor='ambassador-comment'>
 							Other thoughts or comments(optional):
 						</label>
 						<textarea
 							value={comment}
 							onChange={(e) => setComment(e.target.value)}
-							type="text"
-							id="ambassador-comment"
-							rows="8"
-							name="ambassador-comment"
+							type='text'
+							id='ambassador-comment'
+							rows='8'
+							name='ambassador-comment'
 						/>
 					</div>
 
-					<div className="ambassador-row7">
-						<button type="submit" onClick={() => window.scroll(0, 0)}>
+					<div className='ambassador-row4'>
+						<button type='submit' onClick={() => window.scroll(0, 0)}>
 							Submit
 						</button>
 					</div>
@@ -268,16 +210,16 @@ const AmbassadorForm = () => {
 				style={customStyles}
 				onAfterOpen={afterOpenModal}
 				onRequestClose={closeModal}
-				contentLabel="Example Modal"
-			>
-				<p>
-					Thank you! You have just made a difference in someone else’s
-					life!{' '}
-				</p>
-				<button className="donate-goods-form-btn-popup" onClick={() => makeAnotherDonation()}>
+				contentLabel='Example Modal'>
+				<p>Thank you! You have just made a difference in someone else’s life! </p>
+				<button
+					className='donate-goods-form-btn-popup'
+					onClick={() => makeAnotherDonation()}>
 					Make another donation
 				</button>
-				<button className="donate-goods-form-btn-popup" onClick={() => history.push('/')}>
+				<button
+					className='donate-goods-form-btn-popup'
+					onClick={() => history.push('/')}>
 					Back to home page
 				</button>
 			</Modal>
