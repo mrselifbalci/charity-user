@@ -66,18 +66,15 @@ const DonateGoodsForm = () => {
 			<div className='donate-goods-form-container'>
 				<form onSubmit={submitForm}>
 					<div className='donate-goods-form'>
-						<div className='donate-goods-form-left'>
-							<div className='donate-goods-form-contact-no'>
+						<div className='donate-goods-form-row1'>
+							<div className='donate-goods-form-row1-item'>
 								<label>
-									Contact Number{' '}
-									<span className='donate-goods-form-contact-no-format'>
-										<i>(Format XXX-XXXX-XXXX)</i>
-									</span>
+									Phone
+									<span className='donate-goods-form-contact-no-format'></span>
 								</label>
 								<input
 									type='tel'
 									className='donate-goods-form-contact-no-input'
-									pattern='[0-9]{3}-[0-9]{4}-[0-9]{4}'
 									placeholder='Enter contact number'
 									value={phone}
 									onChange={(e) => setPhone(e.target.value)}
@@ -85,42 +82,26 @@ const DonateGoodsForm = () => {
 								/>
 							</div>
 
-							<div>
-								<label>
-									Type of goods
-									<br /> (books,clothes etc.)
-								</label>
+							<div className='donate-goods-form-row1-item'>
+								<label>Type of goods</label>
 								<input
 									type='text'
-									placeholder='Enter type of goods'
+									placeholder='Enter type of goods (books,clothes etc.)'
 									value={typeOfGoods}
 									onChange={(e) => setTypeOfGoods(e.target.value)}
 									required
 								/>
 							</div>
-							<div>
-								<label>Number of Pieces</label>
+							<div className='donate-goods-form-row1-item'>
+								<label>Quantity</label>
 								<input
-									type='number'
-									placeholder='Enter number of pieces'
+									placeholder='Enter number or amount'
 									value={numberOfPieces}
 									onChange={(e) => setNumberOfPieces(e.target.value)}
 									required
 								/>
 							</div>
-						</div>
-						<div className='donate-goods-form-right'>
-							<div>
-								<label>Address</label>
-								<textarea
-									type='text'
-									placeholder='Enter the full address'
-									value={address}
-									onChange={(e) => setAddress(e.target.value)}
-									required
-								/>
-							</div>
-							<div>
+							<div className='donate-goods-form-row1-item'>
 								<label>Post Code</label>
 								<input
 									type='text'
@@ -130,7 +111,20 @@ const DonateGoodsForm = () => {
 									required
 								/>
 							</div>
-							<div>
+						</div>
+						<div className='donate-goods-form-row2'>
+							<div className='donate-goods-form-row2-item'>
+								<label>Address</label>
+								<textarea
+									type='text'
+									placeholder='Enter the full address'
+									value={address}
+									onChange={(e) => setAddress(e.target.value)}
+									required
+								/>
+							</div>
+
+							<div className='donate-goods-form-row2-item'>
 								<label>Instructions for the Driver</label>
 								<textarea
 									type='text'
